@@ -3,7 +3,7 @@ package org.example.demo.web;
 import org.assertj.core.api.Assertions;
 import org.example.demo.domain.members.Members;
 import org.example.demo.domain.members.MembersRepository;
-import org.example.demo.web.dto.MembersSaveRequestDto;
+import org.example.demo.web.dto.MembersInfoRequestDto;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,7 +37,7 @@ public class MembersApiControllerTest {
     public void members_회원가입() throws Exception {
         String id = "id";
         String pw = "pw";
-        MembersSaveRequestDto requestDto = MembersSaveRequestDto.builder()
+        MembersInfoRequestDto requestDto = MembersInfoRequestDto.builder()
                 .id(id)
                 .pw(pw)
                 .build();

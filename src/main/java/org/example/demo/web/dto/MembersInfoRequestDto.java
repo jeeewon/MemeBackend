@@ -7,12 +7,12 @@ import org.example.demo.domain.members.Members;
 
 @Getter
 @NoArgsConstructor
-public class MembersSaveRequestDto {
+public class MembersInfoRequestDto {
     private String id;
     private String pw;
 
     @Builder
-    public MembersSaveRequestDto(String id,String pw){
+    public MembersInfoRequestDto(String id, String pw){
         this.id = id;
         this.pw = pw;
     }
