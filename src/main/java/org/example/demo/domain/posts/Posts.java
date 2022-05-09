@@ -1,13 +1,16 @@
 package org.example.demo.domain.posts;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.example.demo.domain.BaseTimeEntity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @Entity
 public class Posts extends BaseTimeEntity {
     @Id
@@ -19,10 +22,8 @@ public class Posts extends BaseTimeEntity {
     @Column(nullable = false)
     private Integer meme_kind;
 
-    //작성시간은 어케 되는거지...
-
-    @Column(nullable=false)
-    private Integer cate_seq;
+    @Column() //tv:1,영화:2,커뮤니티:3,기타:4
+    private Integer category;
 
     @Column(length = 100, nullable = false)
     private String title;
@@ -47,11 +48,11 @@ public class Posts extends BaseTimeEntity {
     private Integer report;
 
     @Builder
-    public Posts(Integer m_seq,Integer meme_kind, Integer cate_seq, String title, String image, String explain, String example, String keyw, String keyww, String keywww,Integer likes,Integer report) {
+    public Posts(Integer m_seq,Integer meme_kind, Integer category, String title, String image, String explain, String example, String keyw, String keyww, String keywww,Integer likes,Integer report) {
         //this.board_seq = Board_seq()
         this.m_seq = m_seq;
         this.meme_kind = meme_kind;
-        this.cate_seq = cate_seq;
+        this.category = category;
         this.image = image;
         this.title = title;
         this.explain = explain;
@@ -62,16 +63,10 @@ public class Posts extends BaseTimeEntity {
         this.likes = likes;
         this.report = report;
     }
-/*
-    public void mappingCategory(PostsCategory postsCategory){
-        this.category = postsCategory;
-        postsCategory.mappingPost(this);
-    }*/
+
     public void update(String title, String explain){
         this.title = title;
         this.explain =explain;
     }
-
-
 }
 
