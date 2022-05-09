@@ -10,6 +10,8 @@ import org.example.demo.web.dto.PostsSaveRequestDto;
 import org.example.demo.web.dto.PostsUpdateRequestDto;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @RequiredArgsConstructor
 @Service
@@ -37,5 +39,13 @@ public class PostsService {
 
         return new PostsResponseDto(entity);
     }
+    //search
+    @Transactional
+    public List<Posts> search(String keyw) {
+        List<Posts> postsList = postsRepository.findByTitleContaining(keyw);
+        return postsList;
+    }
+
+
 }
 

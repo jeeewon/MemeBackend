@@ -1,11 +1,15 @@
 package org.example.demo.web;
 
 import lombok.RequiredArgsConstructor;
+import org.example.demo.domain.posts.Posts;
 import org.example.demo.services.posts.PostsService;
 import org.example.demo.web.dto.PostsResponseDto;
 import org.example.demo.web.dto.PostsSaveRequestDto;
 import org.example.demo.web.dto.PostsUpdateRequestDto;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -28,6 +32,14 @@ public class PostsApiController {
         return postsService.findByBoard_seq(board_seq);
     }
 
+    //search
+    @GetMapping("/api/v1/posts/search")
+    public List<Posts> search(String keyw, Model model) {
+        List<Posts> searchList = postsService.search(keyw);
+        model.addAttribute("searchList", searchList);
+        return postsService.search(keyw);
+        //     return "/api/v1/posts/keyw";
+    }
 
 }
 

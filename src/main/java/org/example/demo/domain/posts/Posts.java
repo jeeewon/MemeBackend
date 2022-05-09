@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import org.example.demo.domain.BaseTimeEntity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @NoArgsConstructor
@@ -19,8 +21,6 @@ public class Posts extends BaseTimeEntity {
 
     @Column(nullable = false)
     private Integer meme_kind;
-
-    //작성시간은 어케 되는거지...
 
     @Column() //tv:1,영화:2,커뮤니티:3,기타:4
     private Integer category;
@@ -68,7 +68,5 @@ public class Posts extends BaseTimeEntity {
         this.title = title;
         this.explain =explain;
     }
-
-
 }
 
