@@ -3,37 +3,70 @@ package org.example.demo.domain.posts;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.example.demo.domain.BaseTimeEntity;
 
-
+import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
 @Entity
-public class Posts {
+public class Posts extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(length = 500, nullable = false)
+    private Long board_seq;
+    //@JoinColumn(nullable = false,referencedColumnName = "m_seq")
+    private Integer m_seq;
+
+    @Column(nullable = false)
+    private Integer meme_kind;
+
+    //작성시간은 어케 되는거지...
+
+    @Column() //tv:1,영화:2,커뮤니티:3,기타:4
+    private Integer category;
+
+    @Column(length = 100, nullable = false)
     private String title;
+    private String image;
+
     @Column(columnDefinition = "TEXT", nullable = false)
-    private String content;
-    private String author;
+    private String explain;
+
+    @Column(columnDefinition = "TEXT")
+    private String example;
+
+    @Column(length = 100, nullable = false)
+    private String keyw;
+    @Column(length = 100)
+    private String keyww;
+    @Column(length = 100)
+    private String keywww;
+
+    @Column()
+    private Integer likes;
+    @Column()//columnDefinition = 0)
+    private Integer report;
 
     @Builder
-    public Posts(String title, String content, String author) {
+    public Posts(Integer m_seq,Integer meme_kind, Integer category, String title, String image, String explain, String example, String keyw, String keyww, String keywww,Integer likes,Integer report) {
+        //this.board_seq = Board_seq()
+        this.m_seq = m_seq;
+        this.meme_kind = meme_kind;
+        this.category = category;
+        this.image = image;
         this.title = title;
-        this.content = content;
-        this.author = author;
+        this.explain = explain;
+        this.example = example;
+        this.keyw = keyw;
+        this.keyww = keyww;
+        this.keywww = keywww;
+        this.likes = likes;
+        this.report = report;
     }
 
-    public void update(String title, String content){
+    public void update(String title, String explain){
         this.title = title;
-        this.content = content;
+        this.explain =explain;
     }
 
 

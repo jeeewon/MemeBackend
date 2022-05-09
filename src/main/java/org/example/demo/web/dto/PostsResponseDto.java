@@ -5,15 +5,31 @@ import org.example.demo.domain.posts.Posts;
 
 @Getter
 public class PostsResponseDto {
-    private Long id;
+    private Long board_seq;
+    private Integer meme_kind;
+    private Integer category;
     private String title;
-    private String content;
-    private String author;
+    private String image;
+    private String explain;
+    private String example;
+    private String keyw;
+    private String keyww;
+    private String keywww;
+    private Integer likes;
+    private Integer report;
 
     public PostsResponseDto(Posts entity){
-        this.id = entity.getId();
+        this.board_seq = entity.getBoard_seq();
+        this.meme_kind = entity.getMeme_kind();
+        this.category = entity.getCategory();
         this.title = entity.getTitle();
-        this.content = entity.getContent();
-        this.author = entity.getAuthor();
+        this.image = entity.getImage();
+        this.explain = entity.getExplain();
+        this.example = entity.getExample();
+        this.keyw = entity.getKeyw();
+        this.keyww = entity.getKeyww();
+        this.keywww = entity.getKeywww();
+        this.likes = entity.getLikes();
+        this.report = entity.getReport();
     }
 }

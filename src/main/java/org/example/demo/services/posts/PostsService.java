@@ -18,22 +18,22 @@ public class PostsService {
 
     @Transactional
     public Long save(PostsSaveRequestDto requestDto) {
-        return (postsRepository.save(requestDto.toEntity())).getId();
+        return (postsRepository.save(requestDto.toEntity())).getBoard_seq();
     }
 
     @Transactional
-    public Long update(Long id, PostsUpdateRequestDto requestDto){
-        Posts posts = postsRepository.findById(id)
-                .orElseThrow(()->new IllegalArgumentException("해당 게시글이 없습니다. id="+ id));
+    public Long update(Long board_seq, PostsUpdateRequestDto requestDto){
+        Posts posts = postsRepository.findById(board_seq)
+                .orElseThrow(()->new IllegalArgumentException("해당 게시글이 없습니다. board_seq="+ board_seq));
 
-        posts.update(requestDto.getTitle(), requestDto.getContent());
+        posts.update(requestDto.getTitle(), requestDto.getExplain());
 
-        return id;
+        return board_seq;
     }
 
-    public PostsResponseDto findById (Long id){
-        Posts entity = postsRepository.findById(id)
-                .orElseThrow(()->new IllegalArgumentException("해당 게시글이 없습니다. id="+id));
+    public PostsResponseDto findByBoard_seq (Long board_seq){
+        Posts entity = postsRepository.findById(board_seq)
+                .orElseThrow(()->new IllegalArgumentException("해당 게시글이 없습니다. id="+board_seq));
 
         return new PostsResponseDto(entity);
     }

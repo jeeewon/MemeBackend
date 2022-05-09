@@ -1,7 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
 
 package org.example.demo.web;
 
@@ -10,6 +6,7 @@ import org.assertj.core.api.Assertions;
 import org.example.demo.domain.posts.Posts;
 import org.example.demo.domain.posts.PostsRepository;
 import org.example.demo.web.dto.PostsSaveRequestDto;
+//import org.example.demo.web.dto.PostsUpdateRequestDto;
 import org.example.demo.web.dto.PostsUpdateRequestDto;
 import org.junit.After;
 import org.junit.Test;
@@ -45,12 +42,25 @@ public class PostsApiControllerTest {
 
     @Test
     public void Posts_등록된다() throws Exception {
-        String title = "title";
-        String content = "content";
+        Integer meme_kind = 1;
+        Integer category = 1;
+        String title = "테스트 게시글";
+        String image = "이미지처리";
+        String explain = "테스트 본문";
+        String example = "예시";
+        String keyw = "keyword1";
+        String keyww = "keyword2";
+        String keywww = "keyword3";
         PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder()
+                .meme_kind(meme_kind)
+                .category(category)
                 .title(title)
-                .content(content)
-                .author("author")
+                .image(image)
+                .explain(explain)
+                .example(example)
+                .keyw(keyw)
+                .keyww(keyww)
+                .keywww(keywww)
                 .build();
 
         String url = "http://localhost:" + port + "/api/v1/posts";
@@ -61,8 +71,15 @@ public class PostsApiControllerTest {
         Assertions.assertThat(responseEntity.getBody()).isGreaterThan(0L);
 
         List<Posts> all = this.postsRepository.findAll();
-        assertThat(all.get(0).getTitle()).isEqualTo(title);
-        assertThat(all.get(0).getContent()).isEqualTo(content);
+        Assertions.assertThat(all.get(0).getMeme_kind()).isEqualTo(meme_kind);
+        Assertions.assertThat(all.get(0).getCategory()).isEqualTo(category);
+        Assertions.assertThat(all.get(0).getTitle()).isEqualTo(title);
+        Assertions.assertThat(all.get(0).getImage()).isEqualTo(image);
+        Assertions.assertThat(all.get(0).getExplain()).isEqualTo(explain);
+        Assertions.assertThat(all.get(0).getExample()).isEqualTo(example);
+        Assertions.assertThat(all.get(0).getKeyw()).isEqualTo(keyw);
+        Assertions.assertThat(all.get(0).getKeyww()).isEqualTo(keyww);
+        Assertions.assertThat(all.get(0).getKeywww()).isEqualTo(keywww);
     }
 
     @Test
@@ -70,17 +87,17 @@ public class PostsApiControllerTest {
         //given
         Posts savedPosts = postsRepository.save(Posts.builder()
                 .title("title")
-                .content("content")
-                .author("author")
+                .explain("explain")
+                .m_seq(1)
                 .build());
 
-        Long updateId = savedPosts.getId();
+        Long updateId = savedPosts.getBoard_seq();
         String expectedTitle = "title2";
         String expectedContent = "content2";
 
         PostsUpdateRequestDto requestDto = PostsUpdateRequestDto.builder()
                 .title(expectedTitle)
-                .content(expectedContent)
+                .explain(expectedContent)
                 .build();
 
         String url = "http://localhost:"+port+"/api/v1/posts/"+updateId;
@@ -95,7 +112,7 @@ public class PostsApiControllerTest {
 
         List<Posts> all = postsRepository.findAll();
         assertThat(all.get(0).getTitle()).isEqualTo(expectedTitle);
-        assertThat(all.get(0).getContent()).isEqualTo(expectedContent);
+        assertThat(all.get(0).getExplain()).isEqualTo(expectedContent);
     }
 }
 
