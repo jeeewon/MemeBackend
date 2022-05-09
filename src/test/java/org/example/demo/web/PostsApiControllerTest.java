@@ -4,6 +4,7 @@ package org.example.demo.web;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.example.demo.domain.posts.Posts;
+//import org.example.demo.domain.posts.PostsCategory;
 import org.example.demo.domain.posts.PostsRepository;
 import org.example.demo.web.dto.PostsSaveRequestDto;
 //import org.example.demo.web.dto.PostsUpdateRequestDto;
@@ -43,7 +44,7 @@ public class PostsApiControllerTest {
     @Test
     public void Posts_등록된다() throws Exception {
         Integer meme_kind = 1;
-        Integer category = 1;
+        Integer cate_seq = 1;
         String title = "테스트 게시글";
         String image = "이미지처리";
         String explain = "테스트 본문";
@@ -53,7 +54,7 @@ public class PostsApiControllerTest {
         String keywww = "keyword3";
         PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder()
                 .meme_kind(meme_kind)
-                .category(category)
+                .cate_seq(cate_seq)
                 .title(title)
                 .image(image)
                 .explain(explain)
@@ -72,7 +73,7 @@ public class PostsApiControllerTest {
 
         List<Posts> all = this.postsRepository.findAll();
         Assertions.assertThat(all.get(0).getMeme_kind()).isEqualTo(meme_kind);
-        Assertions.assertThat(all.get(0).getCategory()).isEqualTo(category);
+        Assertions.assertThat(all.get(0).getCate_seq()).isEqualTo(cate_seq);
         Assertions.assertThat(all.get(0).getTitle()).isEqualTo(title);
         Assertions.assertThat(all.get(0).getImage()).isEqualTo(image);
         Assertions.assertThat(all.get(0).getExplain()).isEqualTo(explain);

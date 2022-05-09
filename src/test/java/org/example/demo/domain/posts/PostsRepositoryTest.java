@@ -29,7 +29,7 @@ public class PostsRepositoryTest {
     @Test
     public void 게시글저장_불러오기() {
         Integer meme_kind = 1;
-        Integer category = 1;
+        Integer cate_seq = 1;
         String title = "테스트 게시글";
         String image = "이미지처리";
         String explain = "테스트 본문";
@@ -40,7 +40,7 @@ public class PostsRepositoryTest {
 
         this.postsRepository.save(Posts.builder()
                 .meme_kind(meme_kind)
-                .category(category)
+                .cate_seq(cate_seq)
                 .title(title)
                 .image(image)
                 .explain(explain)
@@ -54,7 +54,7 @@ public class PostsRepositoryTest {
 
         Posts posts = postsList.get(0);
         assertThat(posts.getMeme_kind()).isEqualTo(meme_kind);
-        assertThat(posts.getCategory()).isEqualTo(category);
+        assertThat(posts.getCate_seq()).isEqualTo(cate_seq);
         assertThat(posts.getTitle()).isEqualTo(title);
         assertThat(posts.getImage()).isEqualTo(image);
         assertThat(posts.getExplain()).isEqualTo(explain);
@@ -70,7 +70,7 @@ public class PostsRepositoryTest {
         LocalDateTime now = LocalDateTime.of(2022,5,5,0,0,0);
         postsRepository.save(Posts.builder()
                 .meme_kind(1)
-                .category(1)
+                .cate_seq(1)
                 .title("title")
                 .image("url")
                 .explain("content")
