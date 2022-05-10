@@ -39,11 +39,13 @@ public class Posts extends BaseTimeEntity {
     private String keyw;
     @Column(length = 100)
     private String keyww;
+
     @Column(length = 100)
     private String keywww;
 
     @Column()
     private Integer likes;
+
     @Column()//columnDefinition = 0)
     private Integer report;
 
@@ -63,10 +65,13 @@ public class Posts extends BaseTimeEntity {
         this.likes = likes;
         this.report = report;
     }
-
     public void update(String title, String explain){
         this.title = title;
         this.explain =explain;
+    }
+    //search
+    public void  search(String keyw){
+        this.keyw=keyw;
     }
 }
 

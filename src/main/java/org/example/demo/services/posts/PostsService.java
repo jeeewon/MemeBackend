@@ -4,13 +4,12 @@ import javax.transaction.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import org.example.demo.domain.posts.Posts;
-//import org.example.demo.domain.posts.PostsCategory;
-//import org.example.demo.domain.posts.PostsCategoryRepository;
 import org.example.demo.domain.posts.PostsRepository;
-//import org.example.demo.web.dto.PostsCategoryDto;
 import org.example.demo.web.dto.PostsResponseDto;
 import org.example.demo.web.dto.PostsSaveRequestDto;
+import org.example.demo.web.dto.PostsSearchDto;
 import org.example.demo.web.dto.PostsUpdateRequestDto;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +19,6 @@ import java.util.List;
 @Service
 public class PostsService {
     private final PostsRepository postsRepository;
-    //private final PostsCategoryRepository postsCategoryRepository;
 
     @Transactional
     public Long save(PostsSaveRequestDto requestDto) {
@@ -43,9 +41,16 @@ public class PostsService {
 
         return new PostsResponseDto(entity);
     }
-/*
-    public List<PostsCategoryDto> getPostCategoryList (){
-        return (List<PostsCategoryDto>)(Object)postsCategoryRepository.findAll();
-    }*/
+    //search
+    public List<Posts> search(String keyw) {
+    //    Page<Posts> postsList = postsRepository.findByTitleContaining(keyw);
+ //       List<Posts> postsList = postsRepository.findByTitleContaining(keyw);
+        List<Posts> postsList = postsRepository.findBykeywContaining(keyw);
+
+        //      List<Posts> postsList = postsRepository.findAll();
+        return postsList;
+    }
+
+
 }
 
