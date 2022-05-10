@@ -38,8 +38,6 @@ public class PostsApiController {
         List<Posts> searchList = postsService.search(keyw);
         model.addAttribute("searchList", searchList);
         return postsService.search(keyw);
-        //     return "/api/v1/posts/keyw";
     }
-
 }
 
