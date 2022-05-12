@@ -7,7 +7,6 @@ import org.example.demo.domain.posts.Posts;
 import org.example.demo.domain.posts.PostsRepository;
 import org.example.demo.web.dto.PostsResponseDto;
 import org.example.demo.web.dto.PostsSaveRequestDto;
-import org.example.demo.web.dto.PostsSearchDto;
 import org.example.demo.web.dto.PostsUpdateRequestDto;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
