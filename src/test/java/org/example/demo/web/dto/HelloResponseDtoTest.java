@@ -2,6 +2,7 @@ package org.example.demo.web.dto;
 
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.Test;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 public class HelloResponseDtoTest {
     public HelloResponseDtoTest() {

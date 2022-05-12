@@ -23,7 +23,7 @@ public class Posts extends BaseTimeEntity {
     private Integer meme_kind;
 
     @Column() //tv:1,영화:2,커뮤니티:3,기타:4
-    private Integer category;
+    private Integer cate_seq;
 
     @Column(length = 100, nullable = false)
     private String title;
@@ -50,11 +50,11 @@ public class Posts extends BaseTimeEntity {
     private Integer report;
 
     @Builder
-    public Posts(Integer m_seq,Integer meme_kind, Integer category, String title, String image, String explain, String example, String keyw, String keyww, String keywww,Integer likes,Integer report) {
+    public Posts(Integer m_seq,Integer meme_kind, Integer cate_seq, String title, String image, String explain, String example, String keyw, String keyww, String keywww,Integer likes,Integer report) {
         //this.board_seq = Board_seq()
         this.m_seq = m_seq;
         this.meme_kind = meme_kind;
-        this.category = category;
+        this.cate_seq = cate_seq;
         this.image = image;
         this.title = title;
         this.explain = explain;
@@ -70,7 +70,7 @@ public class Posts extends BaseTimeEntity {
         this.explain =explain;
     }
     //search
-    public void  search(String keyw){
+    public void search(String keyw){
         this.keyw=keyw;
     }
 }

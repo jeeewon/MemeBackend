@@ -1,6 +1,6 @@
 
 package org.example.demo.web;
-
+import org.springframework.http.MediaType;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.example.demo.domain.posts.Posts;
@@ -21,15 +21,18 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class PostsApiControllerTest {
+
     @LocalServerPort
-    private int port;
+    private Integer port;
     @Autowired
     private TestRestTemplate restTemplate;
     @Autowired
