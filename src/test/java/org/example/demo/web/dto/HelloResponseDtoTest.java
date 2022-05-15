@@ -1,8 +1,10 @@
 package org.example.demo.web.dto;
 
-import org.assertj.core.api.AssertionsForClassTypes;
+
 import org.junit.Test;
 import org.springframework.test.context.web.WebAppConfiguration;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class HelloResponseDtoTest {
     public HelloResponseDtoTest() {
@@ -13,7 +15,7 @@ public class HelloResponseDtoTest {
         String name = "test";
         int amount = 1000;
         HelloResponseDto dto = new HelloResponseDto(name, amount);
-        AssertionsForClassTypes.assertThat(dto.getName()).isEqualTo(name);
-        AssertionsForClassTypes.assertThat(dto.getAmount()).isEqualTo(amount);
+        assertThat(dto.getName()).isEqualTo(name);
+        assertThat(dto.getAmount()).isEqualTo(amount);
     }
 }

@@ -14,6 +14,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
@@ -35,8 +36,9 @@ public class HelloControllerTest {
     public void hello가_리턴된다() throws Exception {
         String hello = "hello";
         mvc.perform(get("/hello"))
-                .andExpect(status().isOk())
-                .andExpect(content().string(hello));
+                .andDo(print()) //Log 내용
+                .andExpect(status().isOk()) //상태 이상 체크
+                .andExpect(content().string("hello")); //내용에 "hello"가 있는지 유무
     }
 
     @WithMockUser(roles="USER")
@@ -44,12 +46,13 @@ public class HelloControllerTest {
     public void helloDto가_리턴된다() throws Exception {
         String name = "hello";
         int amount = 1000;
-        this.mvc.perform(
-                get("/hello/dto")
-                        .param("name", name)
-                        .param("amount", String.valueOf(amount)));
-                /*.andExpect(status().isOk())
-                .andExpect(jsonPath(".$name",is(name)))
-                .andExpect(jsonPath(".$amount",is(amount)));*/
+
+        mvc.perform(
+                        get("/hello/dto")
+                                .param("name", name)
+                                .param("amount", String.valueOf(amount)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name", is(name)))
+                .andExpect(jsonPath("$.amount", is(amount)));
     }
 }
