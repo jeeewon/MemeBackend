@@ -1,4 +1,4 @@
-package org.example.demo.web.dto;
+/*package org.example.demo.web.dto;
 
 
 import org.junit.Test;
@@ -6,8 +6,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class HelloResponseDtoTest {
-    public HelloResponseDtoTest() {
+public class HelloResponseDTOTest {
+    public HelloResponseDTOTest() {
     }
 
     @Test
@@ -18,4 +18,4 @@ public class HelloResponseDtoTest {
         assertThat(dto.getName()).isEqualTo(name);
         assertThat(dto.getAmount()).isEqualTo(amount);
     }
-}
+}*/

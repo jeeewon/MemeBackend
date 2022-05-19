@@ -1,4 +1,4 @@
-package org.example.demo.domain;
+/*package org.example.demo.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,4 +10,4 @@ public enum Role {
     MEMBER("ROLE_MEMBER");
 
     private String value;
-}
+}*/

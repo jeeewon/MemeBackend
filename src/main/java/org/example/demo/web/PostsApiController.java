@@ -16,24 +16,24 @@ import java.util.List;
 public class PostsApiController {
     private final PostsService postsService;
 
-    @PostMapping("/api/v1/posts")
+    @PostMapping("/posts")
     public Long save(@RequestBody PostsSaveRequestDto requestDto) {
 
         return postsService.save(requestDto);
     }
 
-    @PutMapping("/api/v1/posts/{board_seq}")
+    @PutMapping("/posts/{board_seq}")
     public Long update(@PathVariable Long board_seq, @RequestBody PostsUpdateRequestDto requestDto){
         return postsService.update(board_seq,requestDto);
     }
 
-    @GetMapping("/api/v1/posts/{board_seq}")
+    @GetMapping("/posts/{board_seq}")
     public PostsResponseDto findByBoard_seq(@PathVariable Long board_seq){
         return postsService.findByBoard_seq(board_seq);
     }
 
     //search
-    @GetMapping("/api/v1/posts/search")
+    @GetMapping("/posts/search")
     public List<Posts> search(String keyw, Model model) {
         List<Posts> searchList = postsService.search(keyw);
         model.addAttribute("searchList", searchList);
