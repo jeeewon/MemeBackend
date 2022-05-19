@@ -18,11 +18,11 @@ public class Posts extends BaseTimeEntity {
 
     private Long board_seq;
     //@JoinColumn(nullable = false,referencedColumnName = "m_seq")
-    private Integer m_seq;
-
-    /*@Column(nullable = false)
+    /*private Integer m_seq;
+*/
+    @Column(nullable = false)
     private Integer meme_kind;
-    */
+
     @Column() //tv:1,영화:2,커뮤니티:3,기타:4
     private Integer cate_seq;
 
@@ -53,8 +53,8 @@ public class Posts extends BaseTimeEntity {
     @Builder
     public Posts(/*Integer m_seq,*/Integer meme_kind, Integer cate_seq, String title, String image, String explain, String example, String keyw, String keyww, String keywww,Integer likes,Integer report) {
         //this.board_seq = Board_seq()
-        this.m_seq = m_seq;
-        //this.meme_kind = meme_kind;
+        //this.m_seq = m_seq;
+        this.meme_kind = meme_kind;
         this.cate_seq = cate_seq;
         this.image = image;
         this.title = title;
