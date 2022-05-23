@@ -8,9 +8,15 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PostsRepository extends JpaRepository<Posts, Long> {
-    List<Posts> findBykeywContaining(String keyw);
+    @Query("SELECT p FROM Posts p ORDER BY p.id DESC")
+    Page<Posts> findAllDesc(Pageable pageable);
+    Page<Posts> findByTypeOrCategory(String type, String category,Pageable pageable);
+    Page<Posts> findBykeywContaining(String keyw,Pageable pageable);
+    Page<Posts> findAll(Pageable pageable);
 
-
+    //@Query("SELECT p FROM Posts p WHERE p.keyw=keyword OR p.keyww=keyword OR p.keywww=keyword")
+    //List<Posts> findKeyword(String keyword);
 }
