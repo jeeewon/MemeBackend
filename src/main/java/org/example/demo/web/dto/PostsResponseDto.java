@@ -7,9 +7,10 @@ import org.example.demo.domain.posts.Posts;
 
 @Getter
 public class PostsResponseDto {
-    private Long board_seq;
-    private Integer meme_kind;
-    private Integer cate_seq;
+    private Long id;
+    //private String author;
+    //private String type;
+    //private String cate_seq;
     private String title;
     private String image;
     private String explain;
@@ -21,9 +22,10 @@ public class PostsResponseDto {
     private Integer report;
 
     public PostsResponseDto(Posts entity){
-        this.board_seq = entity.getBoard_seq();
-        this.meme_kind = entity.getMeme_kind();
-        this.cate_seq = entity.getCate_seq();
+        this.id = entity.getId();
+        //this.author = entity.getAuthor();
+        //this.type = entity.getType();
+        //this.cate_seq = entity.getCategory();
         this.title = entity.getTitle();
         this.image = entity.getImage();
         this.explain = entity.getExplain();

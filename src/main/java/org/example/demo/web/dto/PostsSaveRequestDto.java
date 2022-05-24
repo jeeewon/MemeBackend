@@ -10,8 +10,9 @@ import org.example.demo.domain.posts.Posts;
 @Getter
 @NoArgsConstructor
 public class PostsSaveRequestDto {
-    private Integer meme_kind;
-    private Integer cate_seq;
+    private String author;
+    private String type;
+    private String category;
     private String title;
     private String explain;
     private String image;
@@ -21,11 +22,12 @@ public class PostsSaveRequestDto {
     private String keywww;
 
     @Builder
-    public PostsSaveRequestDto(Integer meme_kind, Integer cate_seq, String title, String image, String explain, String example, String keyw, String keyww, String keywww) {
-        this.meme_kind = meme_kind;
-        this.cate_seq = cate_seq;
-        this.title = title;
+    public PostsSaveRequestDto(String author, String type, String category, String title, String image, String explain, String example, String keyw, String keyww, String keywww) {
+        this.author = author;
+        this.type = type;
+        this.category = category;
         this.image = image;
+        this.title = title;
         this.explain = explain;
         this.example = example;
         this.keyw = keyw;
@@ -35,10 +37,11 @@ public class PostsSaveRequestDto {
 
     public Posts toEntity() {
         return Posts.builder()
-                .meme_kind(this.meme_kind)
-                .cate_seq(this.cate_seq)
-                .title(this.title)
+                .author(this.author)
+                .type(this.type)
+                .category(this.category)
                 .image(this.image)
+                .title(this.title)
                 .explain(this.explain)
                 .example(this.example)
                 .keyw(this.keyw)

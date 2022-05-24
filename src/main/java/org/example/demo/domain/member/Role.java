@@ -1,13 +1,15 @@
-/*package org.example.demo.domain;
-
-import lombok.AllArgsConstructor;
+/*package org.example.demo.domain.member;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-@AllArgsConstructor
 @Getter
+@RequiredArgsConstructor
 public enum Role {
-    ADMIN("ROLE_ADMIN"),
-    MEMBER("ROLE_MEMBER");
 
-    private String value;
+    GUEST("ROLE_GUEST", "손님"),
+    USER("MEMBER", "일반 사용자");
+
+    private final String key;
+    private final String title;
+
 }*/
