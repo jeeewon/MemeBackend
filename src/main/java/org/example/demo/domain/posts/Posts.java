@@ -1,71 +1,87 @@
 package org.example.demo.domain.posts;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.example.demo.domain.BaseTimeEntity;
+//import org.example.demo.domain.bookmark.Bookmark;
+import org.example.demo.domain.comment.Comment;
+import org.example.demo.domain.member.UserEntity;
 
 import javax.persistence.*;
+import java.util.List;
 
-@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Builder
+@Getter
 @Entity
-@Table
 public class Posts extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@GeneratedValue(generator="system-uuid")
-    //@GenericGenerator(name="system-uuid", strategy = "uuid")
     private Long id;
-    private String author;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id")
+    private UserEntity userEntity;
+
     @Column(nullable = false)
     private String type;
+
     @Column(nullable = false)
     private String category;
+
     @Column(length = 100, nullable = false)
     private String title;
+
+    //private Long fileId;
     private String image;
+
     @Column(columnDefinition = "TEXT", nullable = false)
     private String explain;
+
     @Column(columnDefinition = "TEXT")
     private String example;
+
     @Column(length = 100, nullable = false)
     private String keyw;
+
     @Column(length = 100)
     private String keyww;
+
     @Column(length = 100)
     private String keywww;
 
-    @Column()
+    @Column(columnDefinition = "integer default 0")
     private Integer likes;
+
+    private Integer bookmarkCnt;
 
     @Column()//columnDefinition = 0)
     private Integer report;
 
-    @Builder
-    public Posts(/*Integer m_seq,*/String author, String type, String category, String title, String image, String explain, String example, String keyw, String keyww, String keywww, Integer likes, Integer report) {
-        //this.board_seq = Board_seq()
-        this.author = author;
-        this.type = type;
-        this.category = category;
-        this.image = image;
-        this.title = title;
-        this.explain = explain;
-        this.example = example;
-        this.keyw = keyw;
-        this.keyww = keyww;
-        this.keywww = keywww;
-        this.likes = likes;
-        this.report = report;
-    }
-    /*
+    @OneToMany(mappedBy = "posts", fetch=FetchType.EAGER, cascade = CascadeType.REMOVE)
+    private List<Comment> comments;
+/*
+    @JsonIgnoreProperties({"posts"})
+    @OneToMany(mappedBy = "posts")
+    private List<Bookmark> bookmarkList;
+*/
+    //게시글 수정 메소드
     public void update(String title, String explain){
         this.title = title;
         this.explain =explain;
     }
-    //search
+
+    //게시글 검색 메소드
     public void search(String keyw){
         this.keyw=keyw;
-    }*/
+    }
+
+    public void updateLikes(Integer likes){
+        this.likes = likes;
+    }
+    public void updateBookmarkCnt(Integer bookmarkCnt){
+        this.bookmarkCnt=bookmarkCnt;
+    }
 }
 

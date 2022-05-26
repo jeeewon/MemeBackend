@@ -1,9 +1,6 @@
-package org.example.demo.web.dto;
+package org.example.demo.web.dto.posts;
 
 import lombok.Getter;
-import org.example.demo.domain.posts.Posts;
-
-import java.time.LocalDateTime;
 
 @Getter
 public class PostsListResponseDto {

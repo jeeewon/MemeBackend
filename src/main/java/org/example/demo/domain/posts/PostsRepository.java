@@ -17,6 +17,16 @@ public interface PostsRepository extends JpaRepository<Posts, Long> {
     Page<Posts> findBykeywContaining(String keyw,Pageable pageable);
     Page<Posts> findAll(Pageable pageable);
 
+    @Modifying
+    @Query("update Posts p set p.likes = p.likes + 1 where p.id = :id")
+    //@Query("update Posts p set p.likes = p.likes + 1")
+    Integer updateLikes(Long id);
+/*
+    @Modifying
+    @Query("update Posts p set p.likes = p.likes + 1 where p.id = :id")
+    //@Query("update Posts p set p.bookmarkCnt = p.bookmarkCnt + 1")
+    Integer updateBookmarkCnt(Long id);
+*/
     //@Query("SELECT p FROM Posts p WHERE p.keyw=keyword OR p.keyww=keyword OR p.keywww=keyword")
     //List<Posts> findKeyword(String keyword);
 }

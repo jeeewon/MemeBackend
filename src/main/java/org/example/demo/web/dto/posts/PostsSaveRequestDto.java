@@ -1,52 +1,43 @@
-package org.example.demo.web.dto;
+package org.example.demo.web.dto.posts;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.example.demo.domain.member.UserEntity;
 import org.example.demo.domain.posts.Posts;
 //import org.example.demo.domain.posts.PostsCategory;
 //import org.example.demo.domain.posts.PostsCategory;
 
-@Getter
+@Data
+@AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class PostsSaveRequestDto {
-    private String author;
+    private UserEntity userEntity;
     private String type;
     private String category;
     private String title;
     private String explain;
-    private String image;
+    private Long fileId;
+    //private String image;
     private String example;
     private String keyw;
     private String keyww;
     private String keywww;
-
-    @Builder
-    public PostsSaveRequestDto(String author, String type, String category, String title, String image, String explain, String example, String keyw, String keyww, String keywww) {
-        this.author = author;
-        this.type = type;
-        this.category = category;
-        this.image = image;
-        this.title = title;
-        this.explain = explain;
-        this.example = example;
-        this.keyw = keyw;
-        this.keyww = keyww;
-        this.keywww = keywww;
-    }
+    private Integer likes;
 
     public Posts toEntity() {
         return Posts.builder()
-                .author(this.author)
+                .userEntity(this.userEntity)
                 .type(this.type)
                 .category(this.category)
-                .image(this.image)
+                //.image(this.image)
+                .fileId(this.fileId)
                 .title(this.title)
                 .explain(this.explain)
                 .example(this.example)
                 .keyw(this.keyw)
                 .keyww(this.keyww)
                 .keywww(this.keywww)
+                .likes(0)
                 .build();
     }
 }
