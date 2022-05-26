@@ -3,6 +3,7 @@ package org.example.demo.domain.member;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 
 @Data
 @Builder
@@ -14,7 +15,7 @@ import javax.persistence.*;
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // 유저에게 고유하게 부여되는 id.
+    private Integer id; // 유저에게 고유하게 부여되는 id.
 
     @Column(nullable = false)
     private String email;

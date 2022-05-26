@@ -22,5 +22,5 @@ public class UserDto {
     private String password;
     @NotEmpty
     private String passwordConfirm;
-    private Long id;
+    private Integer id;
 }
