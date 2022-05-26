@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 //@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
 
-@SpringBootApplication(scanBasePackages = {"org.example.demo.domain.member.UserRepository"})
-//@SpringBootApplication
+//@SpringBootApplication(scanBasePackages = {"org.example.demo.domain.member.UserRepository"})
+@SpringBootApplication
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
