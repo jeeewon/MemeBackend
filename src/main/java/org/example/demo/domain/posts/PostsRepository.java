@@ -19,7 +19,7 @@ public interface PostsRepository extends JpaRepository<Posts, Long> {
 
     @Modifying
     @Query("update Posts p set p.likes = p.likes + 1 where p.id = :id")
-    //@Query("update Posts p set p.likes = p.likes + 1")
+        //@Query("update Posts p set p.likes = p.likes + 1")
     Integer updateLikes(Long id);
 /*
     @Modifying

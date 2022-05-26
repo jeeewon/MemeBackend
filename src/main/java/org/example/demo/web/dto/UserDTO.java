@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
+public class UserDTO {
     private String token;
     @NotEmpty
     @Size(min=5, max=10)

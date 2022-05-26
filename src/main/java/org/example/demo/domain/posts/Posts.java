@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.example.demo.domain.BaseTimeEntity;
 //import org.example.demo.domain.bookmark.Bookmark;
-import org.example.demo.domain.comment.Comment;
+//import org.example.demo.domain.comment.Comment;
 import org.example.demo.domain.member.UserEntity;
 
 import javax.persistence.*;
@@ -58,14 +58,14 @@ public class Posts extends BaseTimeEntity {
 
     @Column()//columnDefinition = 0)
     private Integer report;
-
+/*
     @OneToMany(mappedBy = "posts", fetch=FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Comment> comments;
-/*
-    @JsonIgnoreProperties({"posts"})
-    @OneToMany(mappedBy = "posts")
-    private List<Bookmark> bookmarkList;
-*/
+
+        @JsonIgnoreProperties({"posts"})
+        @OneToMany(mappedBy = "posts")
+        private List<Bookmark> bookmarkList;
+    */
     //게시글 수정 메소드
     public void update(String title, String explain){
         this.title = title;
@@ -84,4 +84,3 @@ public class Posts extends BaseTimeEntity {
         this.bookmarkCnt=bookmarkCnt;
     }
 }
-

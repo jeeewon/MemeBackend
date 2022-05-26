@@ -16,7 +16,8 @@ import java.util.stream.Collectors;
 public class PostsResponseDto {
     private Long id;
     private String title;
-    private Long fileId;
+    //private Long fileId;
+    private String image;
     private String explain;
     private String example;
     private String keyw;
@@ -25,12 +26,11 @@ public class PostsResponseDto {
     private Integer likes;
     private Integer report;
 
-    private List<CommentResponseDto> comments;
-
     public PostsResponseDto(Posts entity){
         this.id = entity.getId();
         this.title = entity.getTitle();
-        this.fileId = entity.getFileId();
+        //this.fileId = entity.getFileId();
+        this.image = entity.getImage();
         this.explain = entity.getExplain();
         this.example = entity.getExample();
         this.keyw = entity.getKeyw();
@@ -38,6 +38,6 @@ public class PostsResponseDto {
         this.keywww = entity.getKeywww();
         this.likes = entity.getLikes();
         this.report = entity.getReport();
-        this.comments = entity.getComments().stream().map(CommentResponseDto::new).collect(Collectors.toList());
+        //this.comments = entity.getComments().stream().map(CommentResponseDto::new).collect(Collectors.toList());
     }
 }

@@ -2,9 +2,6 @@ package org.example.demo.web;
 
 import lombok.RequiredArgsConstructor;
 import org.example.demo.domain.posts.PostsRepository;
-import org.example.demo.web.dto.comment.CommentRequestDto;
-//import org.example.demo.services.BookmarkService;
-import org.example.demo.services.posts.CommentService;
 import org.example.demo.services.posts.PostsService;
 //import org.example.demo.web.dto.PostsUpdateRequestDto;
 import org.example.demo.web.dto.posts.PostsListResponseDto;
@@ -23,8 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class PostsApiController {
     private final PostsService postsService;
-    private final CommentService commentService;
-    //private final BookmarkService bookmarkService;
+
     @Autowired
     PostsRepository postsRepository;
 
@@ -75,12 +71,12 @@ public class PostsApiController {
     public Integer likesUpdate(@PathVariable Long id){
         return postsService.updateLikes(id);
     }
-
+/*
     @PostMapping("/posts/{id}/comments")
     public Long commentSave(@AuthenticationPrincipal String email,@PathVariable Long id, @RequestParam CommentRequestDto requestDto){
         return commentService.commentSave(email,id,requestDto); //id는 board id
     }
-/*
+*//*
     @PostMapping("/posts/{postId}/bookmark")
     public void bookmark(@PathVariable Long postId, @AuthenticationPrincipal String email){
         //bookmarkService.bookmark(postId,authentication.getName());
@@ -93,4 +89,3 @@ public class PostsApiController {
     }
 */
 }
-

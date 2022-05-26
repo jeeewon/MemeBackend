@@ -3,8 +3,6 @@ package org.example.demo.web.dto.posts;
 import lombok.*;
 import org.example.demo.domain.member.UserEntity;
 import org.example.demo.domain.posts.Posts;
-//import org.example.demo.domain.posts.PostsCategory;
-//import org.example.demo.domain.posts.PostsCategory;
 
 @Data
 @AllArgsConstructor
@@ -16,8 +14,8 @@ public class PostsSaveRequestDto {
     private String category;
     private String title;
     private String explain;
-    private Long fileId;
-    //private String image;
+    //private Long fileId;
+    private String image;
     private String example;
     private String keyw;
     private String keyww;
@@ -29,8 +27,8 @@ public class PostsSaveRequestDto {
                 .userEntity(this.userEntity)
                 .type(this.type)
                 .category(this.category)
-                //.image(this.image)
-                .fileId(this.fileId)
+                .image(this.image)
+                //.fileId(this.fileId)
                 .title(this.title)
                 .explain(this.explain)
                 .example(this.example)
@@ -41,4 +39,3 @@ public class PostsSaveRequestDto {
                 .build();
     }
 }
-
