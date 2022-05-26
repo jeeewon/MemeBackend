@@ -27,18 +27,20 @@ dependencies {
     compileOnly('org.projectlombok:lombok')
     annotationProcessor('org.projectlombok:lombok')
     compile('org.springframework.boot:spring-boot-starter-web')
-//    compile('com.h2database:h2')
+    compile('com.h2database:h2')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
 
     // 추가
     compile('org.springframework.boot:spring-boot-starter-security')
     //compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity5')
- //   compile('com.h2database:h2')
+    compile('com.h2database:h2')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile("org.springframework.security:spring-security-test")
-
+    compile('org.springframework.boot:spring-boot-starter-jdbc')
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
-
     //mysql
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     runtimeOnly 'mysql:mysql-connector-java'
+    //s3
+//    compile 'org.springframework.cloud:spring-cloud-starter-aws:2.0.1.RELEASE'
 }

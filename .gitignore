@@ -5,3 +5,8 @@
 build
 out
 out/production
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+application.properties

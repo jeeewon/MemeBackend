@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 //@EnableJpaAuditing
 
 //@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
+
 @SpringBootApplication(scanBasePackages = {"org.example.demo.domain.member.UserRepository"})
 //@SpringBootApplication
 public class Application {
