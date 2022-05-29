@@ -1,9 +1,10 @@
 package org.example.demo.web;
+
+import org.example.demo.web.dto.member.UserDto;
 import lombok.extern.slf4j.Slf4j;
 import org.example.demo.domain.member.UserEntity;
 import org.example.demo.security.TokenProvider;
 import org.example.demo.services.member.UserService;
-import org.example.demo.web.dto.member.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,7 +19,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
     @Autowired
     private TokenProvider tokenProvider;
 

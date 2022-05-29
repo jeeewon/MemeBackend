@@ -1,5 +1,6 @@
 package org.example.demo.domain.member;
 
+import org.example.demo.domain.member.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -11,8 +11,8 @@ import org.springframework.context.annotation.ComponentScan;
 //@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
 
 //@SpringBootApplication(scanBasePackages = {"org.example.demo.domain.member.UserRepository"})
-@EnableJpaRepositories("org.example.demo.domain.member.UserRepository")
-@ComponentScan({"org.example.demo.domain.member.UserRepository"})
+//@EnableJpaRepositories("org.example.demo.domain.member.UserRepository")
+//@ComponentScan({"org.example.demo.domain.member.UserRepository"})
 @SpringBootApplication
 public class Application {
     public static void main(String[] args) {

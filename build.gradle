@@ -27,13 +27,13 @@ dependencies {
     compileOnly('org.projectlombok:lombok')
     annotationProcessor('org.projectlombok:lombok')
     compile('org.springframework.boot:spring-boot-starter-web')
-    compile('com.h2database:h2')
+    //compile('com.h2database:h2')
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
 
     // 추가
     compile('org.springframework.boot:spring-boot-starter-security')
     //compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity5')
-    compile('com.h2database:h2')
+    //compile('com.h2database:h2')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile("org.springframework.security:spring-security-test")
     compile('org.springframework.boot:spring-boot-starter-jdbc')

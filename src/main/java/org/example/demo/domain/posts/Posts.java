@@ -14,11 +14,11 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Getter
-@Entity
+@Entity(name="posts")
 public class Posts extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
@@ -37,7 +37,7 @@ public class Posts extends BaseTimeEntity {
     private String image;
 
     @Column(columnDefinition = "TEXT", nullable = false)
-    private String explain;
+    private String description;
 
     @Column(columnDefinition = "TEXT")
     private String example;
@@ -53,7 +53,6 @@ public class Posts extends BaseTimeEntity {
 
     @Column(columnDefinition = "integer default 0")
     private Integer likes;
-
     private Integer bookmarkCnt;
 
     @Column()//columnDefinition = 0)
@@ -67,9 +66,9 @@ public class Posts extends BaseTimeEntity {
         private List<Bookmark> bookmarkList;
     */
     //게시글 수정 메소드
-    public void update(String title, String explain){
+    public void update(String title, String description){
         this.title = title;
-        this.explain =explain;
+        this.description = description;
     }
 
     //게시글 검색 메소드

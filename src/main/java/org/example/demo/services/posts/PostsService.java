@@ -1,7 +1,7 @@
 package org.example.demo.services.posts;
 
-import org.example.demo.domain.member.UserEntity;
-import org.example.demo.domain.member.UserRepository;
+//import org.example.demo.domain.member.UserEntity;
+//import org.example.demo.domain.member.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,23 +15,25 @@ import org.example.demo.web.dto.posts.PostsSaveRequestDto;
 //import org.example.demo.web.dto.PostsUpdateRequestDto;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 
 @RequiredArgsConstructor
 @Service
 public class PostsService {
     private final PostsRepository postsRepository;
-    private final UserRepository userRepository;
+    //private final UserRepository userRepository;
     //private final PostsCategoryRepository postsCategoryRepository;
 
     @Transactional
-    public Long save(String email,PostsSaveRequestDto requestDto) {
-        UserEntity userEntity = userRepository.findByEmail(email);
-        requestDto.setUserEntity(userEntity);
+    public Integer save(String email,PostsSaveRequestDto requestDto) {
+        //UserEntity userEntity = userRepository.findByEmail(email);
+        //requestDto.setUserEntity(userEntity);
         return (postsRepository.save(requestDto.toEntity())).getId();
     }
 
     @Transactional
-    public PostsResponseDto findById(Long id){
+    public PostsResponseDto findById(Integer id){
         Posts entity = postsRepository.findById(id)
                 .orElseThrow(()->new IllegalArgumentException("해당 게시글이 없습니다. id="+id));
         //entity.updateLikes(postsRepository.updateLikes(id));
@@ -41,7 +43,7 @@ public class PostsService {
     }
 
     @Transactional
-    public Integer updateLikes(Long id){
+    public Integer updateLikes(Integer id){
         return postsRepository.updateLikes(id);
     }
 
@@ -71,9 +73,9 @@ public class PostsService {
 
     //삭제
     @Transactional
-    public void delete(Long id) {
+    public void delete(Integer id) {
         Posts posts = postsRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. board_seq=" + id));
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. board_seq=" + id));
 
         postsRepository.delete(posts);
     }

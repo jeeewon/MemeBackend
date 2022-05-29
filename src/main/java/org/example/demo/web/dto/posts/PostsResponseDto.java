@@ -14,11 +14,11 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostsResponseDto {
-    private Long id;
+    private Integer id;
     private String title;
     //private Long fileId;
     private String image;
-    private String explain;
+    private String description;
     private String example;
     private String keyw;
     private String keyww;
@@ -31,7 +31,7 @@ public class PostsResponseDto {
         this.title = entity.getTitle();
         //this.fileId = entity.getFileId();
         this.image = entity.getImage();
-        this.explain = entity.getExplain();
+        this.description = entity.getDescription();
         this.example = entity.getExample();
         this.keyw = entity.getKeyw();
         this.keyww = entity.getKeyww();

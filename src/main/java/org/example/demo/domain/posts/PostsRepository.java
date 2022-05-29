@@ -1,4 +1,3 @@
-
 package org.example.demo.domain.posts;
 
 import org.springframework.data.domain.Page;
@@ -6,21 +5,24 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-
-public interface PostsRepository extends JpaRepository<Posts, Long> {
-    @Query("SELECT p FROM Posts p ORDER BY p.id DESC")
+@Repository
+public interface PostsRepository extends JpaRepository<Posts, Integer> {
+    @Query(value = "SELECT p " +
+            "FROM Posts p " +
+            "ORDER BY p.id DESC",nativeQuery = true)
     Page<Posts> findAllDesc(Pageable pageable);
     Page<Posts> findByTypeOrCategory(String type, String category,Pageable pageable);
     Page<Posts> findBykeywContaining(String keyw,Pageable pageable);
     Page<Posts> findAll(Pageable pageable);
 
     @Modifying
-    @Query("update Posts p set p.likes = p.likes + 1 where p.id = :id")
+    @Query(value = "update Posts p set p.likes = p.likes + 1 where p.id = :id",nativeQuery = true)
         //@Query("update Posts p set p.likes = p.likes + 1")
-    Integer updateLikes(Long id);
+    Integer updateLikes(Integer id);
 /*
     @Modifying
     @Query("update Posts p set p.likes = p.likes + 1 where p.id = :id")

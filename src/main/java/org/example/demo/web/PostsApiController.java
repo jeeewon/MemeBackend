@@ -26,25 +26,26 @@ public class PostsApiController {
 
     //등록하기
     @PostMapping("/posts")
-    public Long save(@AuthenticationPrincipal String email, @RequestBody PostsSaveRequestDto requestDto) {
+    public Integer save(@AuthenticationPrincipal String email,@RequestBody PostsSaveRequestDto requestDto) {
         return postsService.save(email,requestDto);
     }
 
     //상세페이지
     @GetMapping("/posts/{id}")
-    public PostsResponseDto findById(@PathVariable/* @RequestParam*/ Long id){
+    public PostsResponseDto findById(@PathVariable Integer id){
         //postsService.updateLikes(id);
         /*List<CommentResponseDto> comments = postsService.findById(id);
         if(comments!=null&&!comments.isEmpty()) {
             model.addAttribute("comments",comments);
         }*/
+
         //model.addAttribute("likes", postsService.updateLikes(id));
         return postsService.findById(id);
     }
 
     //삭제
     @DeleteMapping("/posts/{id}")
-    public Long delete(@PathVariable Long id) {
+    public Integer delete(@PathVariable Integer id) {
         postsService.delete(id);
         return id;
     }
@@ -68,9 +69,10 @@ public class PostsApiController {
     }
 
     @PostMapping("/posts/{id}/likes")
-    public Integer likesUpdate(@PathVariable Long id){
+    public Integer likesUpdate(@PathVariable Integer id){
         return postsService.updateLikes(id);
     }
+
 /*
     @PostMapping("/posts/{id}/comments")
     public Long commentSave(@AuthenticationPrincipal String email,@PathVariable Long id, @RequestParam CommentRequestDto requestDto){
