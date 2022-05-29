@@ -20,7 +20,7 @@ public class UserDto {
     @NotEmpty
     @Size(min=5, max=10)
     private String password;
-    @NotEmpty
-    private String passwordConfirm;
+    //@NotEmpty
+    //private String passwordConfirm;
     private Integer id;
 }
