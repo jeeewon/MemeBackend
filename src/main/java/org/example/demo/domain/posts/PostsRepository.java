@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface PostsRepository extends JpaRepository<Posts, Integer> {
     @Query(value = "SELECT p " +
-            "FROM Posts p " +
+            "FROM posts p " +
             "ORDER BY p.id DESC",nativeQuery = true)
     Page<Posts> findAllDesc(Pageable pageable);
     Page<Posts> findByTypeOrCategory(String type, String category,Pageable pageable);
