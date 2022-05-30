@@ -7,8 +7,7 @@ public class PostsListResponseDto {
 
     private String title;
 
-    public PostsListResponseDto(String title/*Posts entity*/) {
-        //this.title = entity.getTitle();
+    public PostsListResponseDto(String title) {
         this.title = title;
     }
 }

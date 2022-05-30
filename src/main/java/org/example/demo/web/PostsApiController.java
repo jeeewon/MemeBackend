@@ -2,6 +2,7 @@ package org.example.demo.web;
 
 import lombok.RequiredArgsConstructor;
 import org.example.demo.domain.posts.PostsRepository;
+import org.example.demo.services.bookmark.BookmarkService;
 import org.example.demo.services.posts.PostsService;
 //import org.example.demo.web.dto.PostsUpdateRequestDto;
 import org.example.demo.web.dto.posts.PostsListResponseDto;
@@ -10,6 +11,7 @@ import org.example.demo.web.dto.posts.PostsSaveRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class PostsApiController {
     private final PostsService postsService;
+    private final BookmarkService bookmarkService;
 
     @Autowired
     PostsRepository postsRepository;
@@ -33,13 +36,6 @@ public class PostsApiController {
     //상세페이지
     @GetMapping("/posts/{id}")
     public PostsResponseDto findById(@PathVariable Integer id){
-        //postsService.updateLikes(id);
-        /*List<CommentResponseDto> comments = postsService.findById(id);
-        if(comments!=null&&!comments.isEmpty()) {
-            model.addAttribute("comments",comments);
-        }*/
-
-        //model.addAttribute("likes", postsService.updateLikes(id));
         return postsService.findById(id);
     }
 
@@ -69,25 +65,26 @@ public class PostsApiController {
     }
 
     @PostMapping("/posts/{id}/likes")
-    public Integer likesUpdate(@PathVariable Integer id){
-        return postsService.updateLikes(id);
+    public void likesUpdate(@PathVariable Integer id){
+        postsService.updateLikes(id);
     }
 
 /*
-    @PostMapping("/posts/{id}/comments")
-    public Long commentSave(@AuthenticationPrincipal String email,@PathVariable Long id, @RequestParam CommentRequestDto requestDto){
-        return commentService.commentSave(email,id,requestDto); //id는 board id
-    }
-*//*
-    @PostMapping("/posts/{postId}/bookmark")
-    public void bookmark(@PathVariable Long postId, @AuthenticationPrincipal String email){
-        //bookmarkService.bookmark(postId,authentication.getName());
-        bookmarkService.bookmark(postId,email);
-    }
-
-    @DeleteMapping("/posts/{id}/unBookmark")
-    public void unBookmark(@PathVariable Long id,Authentication authentication){
-        bookmarkService.unBookmark(id,authentication.getName());
+    @PostMapping("/posts/{post_id}/comments")
+    public Long commentSave(@AuthenticationPrincipal String email,@PathVariable Long post_id, @RequestParam CommentRequestDto requestDto){
+        return commentService.commentSave(email,post_id,requestDto); //id는 board post_id
     }
 */
+    @PostMapping("/posts/{post_id}/bookmark")
+    public void bookmark(@PathVariable Integer post_id, Authentication authentication){
+        //bookmarkService.bookmark(postId,authentication.getName());
+        bookmarkService.bookmark(post_id,authentication.getName());
+        postsService.updateBookmarkCnt(post_id);
+    }
+
+    @DeleteMapping("/posts/{post_id}/unBookmark")
+    public void unBookmark(@PathVariable Integer post_id,Authentication authentication){
+        bookmarkService.unBookmark(post_id,authentication.getName());
+    }
+
 }

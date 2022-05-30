@@ -1,4 +1,4 @@
-/*package org.example.demo.services;
+package org.example.demo.services.bookmark;
 
 import lombok.RequiredArgsConstructor;
 import org.example.demo.domain.bookmark.BookmarkRepository;
@@ -14,13 +14,13 @@ public class BookmarkService {
     private final BookmarkRepository bookmarkRepository;
 
     @Transactional
-    public void bookmark(long postId,String email){
+    public void bookmark(Integer post_id,String email){
         UserEntity userEntity = userRepository.findByEmail(email);
-        bookmarkRepository.bookmark(postId, userEntity.getId());
+        bookmarkRepository.bookmark(post_id, userEntity.getId());
     }
     @Transactional
-    public void unBookmark(long postId,String email){
+    public void unBookmark(Integer post_id,String email){
         UserEntity userEntity = userRepository.findByEmail(email);
-        bookmarkRepository.unBookmark(postId, userEntity.getId());
+        bookmarkRepository.unBookmark(post_id, userEntity.getId());
     }
-}*/
+}

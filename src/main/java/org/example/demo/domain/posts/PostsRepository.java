@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Optional;
 @Repository
 public interface PostsRepository extends JpaRepository<Posts, Integer> {
-    @Query(value = "SELECT p " +
-            "FROM Posts p " +
+    @Query(value = "SELECT * " +
+            "FROM posts p " +
             "ORDER BY p.id DESC",nativeQuery = true)
     Page<Posts> findAllDesc(Pageable pageable);
     Page<Posts> findByTypeOrCategory(String type, String category,Pageable pageable);
@@ -20,9 +20,12 @@ public interface PostsRepository extends JpaRepository<Posts, Integer> {
     Page<Posts> findAll(Pageable pageable);
 
     @Modifying
-    @Query(value = "update Posts p set p.likes = p.likes + 1 where p.id = :id",nativeQuery = true)
-        //@Query("update Posts p set p.likes = p.likes + 1")
+    @Query(value = "update posts p set p.likes = p.likes + 1 where p.id = :id",nativeQuery = true)
     Integer updateLikes(Integer id);
+
+    @Modifying
+    @Query(value = "update posts p set p.bookmarkCnt = p.bookmarkCnt + 1 where p.id = :id",nativeQuery = true)
+    Integer updateBookmarkCnt(Integer id);
 /*
     @Modifying
     @Query("update Posts p set p.likes = p.likes + 1 where p.id = :id")

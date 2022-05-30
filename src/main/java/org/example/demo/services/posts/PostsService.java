@@ -2,6 +2,8 @@ package org.example.demo.services.posts;
 
 //import org.example.demo.domain.member.UserEntity;
 //import org.example.demo.domain.member.UserRepository;
+import org.example.demo.domain.member.UserEntity;
+import org.example.demo.domain.member.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,13 +24,13 @@ import javax.persistence.criteria.CriteriaBuilder;
 @Service
 public class PostsService {
     private final PostsRepository postsRepository;
-    //private final UserRepository userRepository;
+    private final UserRepository userRepository;
     //private final PostsCategoryRepository postsCategoryRepository;
 
     @Transactional
     public Integer save(String email,PostsSaveRequestDto requestDto) {
-        //UserEntity userEntity = userRepository.findByEmail(email);
-        //requestDto.setUserEntity(userEntity);
+        UserEntity userEntity = userRepository.findByEmail(email);
+        requestDto.setUserEntity(userEntity);
         return (postsRepository.save(requestDto.toEntity())).getId();
     }
 
@@ -36,15 +38,16 @@ public class PostsService {
     public PostsResponseDto findById(Integer id){
         Posts entity = postsRepository.findById(id)
                 .orElseThrow(()->new IllegalArgumentException("해당 게시글이 없습니다. id="+id));
-        //entity.updateLikes(postsRepository.updateLikes(id));
-        //entity.updateBookmarkCnt(postsRepository.updateBookmarkCnt(id));
-
         return new PostsResponseDto(entity);
     }
 
     @Transactional
-    public Integer updateLikes(Integer id){
-        return postsRepository.updateLikes(id);
+    public void updateLikes(Integer id){
+        postsRepository.updateLikes(id);
+    }
+    @Transactional
+    public void updateBookmarkCnt(Integer id){
+        postsRepository.updateBookmarkCnt(id);
     }
 
     @Transactional(readOnly=true)

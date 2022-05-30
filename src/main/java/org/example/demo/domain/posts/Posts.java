@@ -5,6 +5,7 @@ import lombok.*;
 import org.example.demo.domain.BaseTimeEntity;
 //import org.example.demo.domain.bookmark.Bookmark;
 //import org.example.demo.domain.comment.Comment;
+import org.example.demo.domain.bookmark.Bookmark;
 import org.example.demo.domain.member.UserEntity;
 
 import javax.persistence.*;
@@ -33,8 +34,8 @@ public class Posts extends BaseTimeEntity {
     @Column(length = 100, nullable = false)
     private String title;
 
-    //private Long fileId;
-    private String image;
+    private Integer fileId;
+    //private String image;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String description;
@@ -53,7 +54,13 @@ public class Posts extends BaseTimeEntity {
 
     @Column(columnDefinition = "integer default 0")
     private Integer likes;
+
+    @Column(columnDefinition = "integer default 0")
     private Integer bookmarkCnt;
+/*
+    @JsonIgnoreProperties({"posts"})
+    @OneToMany(mappedBy = "posts")
+    private List<Bookmark> bookmarkList;*/
 
     @Column()//columnDefinition = 0)
     private Integer report;
