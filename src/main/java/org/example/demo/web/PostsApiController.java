@@ -60,8 +60,8 @@ public class PostsApiController {
 
     //검색
     @GetMapping("/posts/search")
-    public Page<PostsListResponseDto> search(String keyw,@PageableDefault(size=5) Pageable pageable ) {
-        return postsService.search(keyw,pageable);
+    public Page<PostsListResponseDto> search(String keyw,@RequestParam String type,@PageableDefault(size=5) Pageable pageable ) {
+        return postsService.search(keyw,type,pageable);
     }
 
     @PostMapping("/posts/{id}/likes")
