@@ -67,8 +67,8 @@ public class PostsService {
     }
 
     @Transactional(readOnly=true)
-    public Page<PostsListResponseDto> search(String keyw,Pageable pagerequest) {
-        return postsRepository.findBykeywContaining(keyw,pagerequest).map(
+    public Page<PostsListResponseDto> search(String keyw,String type,Pageable pagerequest) {
+        return postsRepository.findBykeywAndType(keyw,type,pagerequest).map(
                 posts -> new PostsListResponseDto(
                         posts.getTitle()
                 ));
