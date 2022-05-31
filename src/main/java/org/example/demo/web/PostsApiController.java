@@ -34,18 +34,13 @@ public class PostsApiController {
 
     //등록하기
     @PostMapping("/posts")
-    public Integer save(@AuthenticationPrincipal String email,@RequestBody PostsSaveRequestDto requestDto) {
-        return postsService.save(email,requestDto);
+    public void save(Authentication authentication,@RequestBody PostsSaveRequestDto requestDto) {
+        postsService.save(authentication.getName(),requestDto);
     }
 
     //상세페이지
     @GetMapping("/posts/{id}")
-    public PostsResponseDto findById(@PathVariable Integer id,@AuthenticationPrincipal String email,Model model){
-        /*List<CommentResponseDto> comments = postsService.findById(id).getComments();
-        if (comments!=null && !comments.isEmpty()){
-            model.addAttribute("comments",comments);
-        }*/
-        //model.addAttribute("posts",postsService.findById(id));
+    public PostsResponseDto findById(@PathVariable Integer id,Authentication authentication,Model model){
         return postsService.findById(id);
     }
 
