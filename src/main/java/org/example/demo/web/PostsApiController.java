@@ -41,10 +41,10 @@ public class PostsApiController {
     //상세페이지
     @GetMapping("/posts/{id}")
     public PostsResponseDto findById(@PathVariable Integer id,@AuthenticationPrincipal String email,Model model){
-        List<CommentResponseDto> comments = postsService.findById(id).getComments();
+        /*List<CommentResponseDto> comments = postsService.findById(id).getComments();
         if (comments!=null && !comments.isEmpty()){
             model.addAttribute("comments",comments);
-        }
+        }*/
         //model.addAttribute("posts",postsService.findById(id));
         return postsService.findById(id);
     }

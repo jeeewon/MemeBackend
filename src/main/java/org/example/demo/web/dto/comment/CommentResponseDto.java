@@ -11,6 +11,6 @@ public class CommentResponseDto {
     String content;
 
     public CommentResponseDto(Comment comment) {
-        this.content = content;
+        this.content = comment.getContent();
     }
 }

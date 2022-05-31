@@ -4,9 +4,7 @@ import lombok.Getter;
 
 @Getter
 public class PostsListResponseDto {
-
     private String title;
-
     public PostsListResponseDto(String title) {
         this.title = title;
     }
