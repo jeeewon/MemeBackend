@@ -1,4 +1,4 @@
 package org.example.demo.domain.posts;
 
-public class FIle {
+public class File {
 }

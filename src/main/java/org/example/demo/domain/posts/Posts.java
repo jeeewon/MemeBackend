@@ -6,6 +6,7 @@ import org.example.demo.domain.BaseTimeEntity;
 //import org.example.demo.domain.bookmark.Bookmark;
 //import org.example.demo.domain.comment.Comment;
 import org.example.demo.domain.bookmark.Bookmark;
+import org.example.demo.domain.comment.Comment;
 import org.example.demo.domain.member.UserEntity;
 
 import javax.persistence.*;
@@ -57,21 +58,15 @@ public class Posts extends BaseTimeEntity {
 
     @Column(columnDefinition = "integer default 0")
     private Integer bookmarkCnt;
-/*
-    @JsonIgnoreProperties({"posts"})
-    @OneToMany(mappedBy = "posts")
-    private List<Bookmark> bookmarkList;*/
 
     @Column()//columnDefinition = 0)
     private Integer report;
-/*
+
+    @OrderBy("id desc")
+    @JsonIgnoreProperties({"posts"})
     @OneToMany(mappedBy = "posts", fetch=FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Comment> comments;
 
-        @JsonIgnoreProperties({"posts"})
-        @OneToMany(mappedBy = "posts")
-        private List<Bookmark> bookmarkList;
-    */
     //게시글 수정 메소드
     public void update(String title, String description){
         this.title = title;

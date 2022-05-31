@@ -7,8 +7,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Optional;
 @Repository
 public interface PostsRepository extends JpaRepository<Posts, Integer> {
     @Query(value = "SELECT * " +
@@ -16,7 +14,7 @@ public interface PostsRepository extends JpaRepository<Posts, Integer> {
             "ORDER BY p.id DESC",nativeQuery = true)
     Page<Posts> findAllDesc(Pageable pageable);
     Page<Posts> findByTypeOrCategory(String type, String category,Pageable pageable);
-    Page<Posts> findBykeywContaining(String keyw,Pageable pageable);
+    Page<Posts> findByKeywAndType(String keyw, String type, Pageable pageable);
     Page<Posts> findAll(Pageable pageable);
 
     @Modifying

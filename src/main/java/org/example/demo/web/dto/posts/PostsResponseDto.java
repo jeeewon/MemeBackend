@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.demo.domain.posts.Posts;
+import org.example.demo.web.dto.comment.CommentResponseDto;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,6 +27,7 @@ public class PostsResponseDto {
     private Integer likes;
     private Integer bookmarkCnt;
     private Integer report;
+    private List<CommentResponseDto> comments;
 
     public PostsResponseDto(Posts entity){
         this.id = entity.getId();
@@ -40,6 +42,6 @@ public class PostsResponseDto {
         this.likes = entity.getLikes();
         this.bookmarkCnt = entity.getBookmarkCnt();
         this.report = entity.getReport();
-        //this.comments = entity.getComments().stream().map(CommentResponseDto::new).collect(Collectors.toList());
+        this.comments = entity.getComments().stream().map(CommentResponseDto::new).collect(Collectors.toList());
     }
 }

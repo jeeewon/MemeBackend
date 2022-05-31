@@ -17,8 +17,6 @@ import org.example.demo.web.dto.posts.PostsSaveRequestDto;
 //import org.example.demo.web.dto.PostsUpdateRequestDto;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
-
 
 @RequiredArgsConstructor
 @Service
@@ -67,8 +65,8 @@ public class PostsService {
     }
 
     @Transactional(readOnly=true)
-    public Page<PostsListResponseDto> search(String keyw,Pageable pagerequest) {
-        return postsRepository.findBykeywContaining(keyw,pagerequest).map(
+    public Page<PostsListResponseDto> search(String keyw,String type, Pageable pagerequest) {
+        return postsRepository.findByKeywAndType(keyw,type,pagerequest).map(
                 posts -> new PostsListResponseDto(
                         posts.getTitle()
                 ));

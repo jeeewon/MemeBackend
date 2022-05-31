@@ -16,13 +16,13 @@ public class PostsSaveRequestDto {
     private String title;
     private String description;
     private Integer fileId;
-    //private String image;
     private String example;
     private String keyw;
     private String keyww;
     private String keywww;
 
     private Integer likes;
+
     private Integer bookmarkCnt;
 
     public Posts toEntity() {
@@ -30,7 +30,6 @@ public class PostsSaveRequestDto {
                 .userEntity(this.userEntity)
                 .type(this.type)
                 .category(this.category)
-                //.image(this.image)
                 .fileId(this.fileId)
                 .title(this.title)
                 .description(this.description)
