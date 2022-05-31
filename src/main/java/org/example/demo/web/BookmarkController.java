@@ -12,16 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 public class BookmarkController {
-
     private final PostsService postsService;
     private final BookmarkService bookmarkService;
 
     @PostMapping("/posts/{postId}/bookmark")
-    public Integer bookmark(@PathVariable Integer postId/*, Authentication authentication*/){
+    public Integer bookmark(@PathVariable Integer postId, Authentication authentication){
         //bookmarkService.bookmark(postId,authentication.getName());
         postsService.updateBookmarkCnt(postId);
         //bookmarkService.bookmark(postId,authentication.getName());
-        return postsService.findById(postId).getBookmarkCnt();
+        return postsService.findById(postId).getBookmark_cnt();
     }
 
     @DeleteMapping("/posts/{postId}/unBookmark")

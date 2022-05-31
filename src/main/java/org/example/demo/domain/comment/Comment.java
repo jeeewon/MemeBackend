@@ -25,12 +25,13 @@ public class Comment {
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "postId")
+    @JoinColumn(name = "post_id")
     private Posts posts;
 
     @ManyToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_id")
     private UserEntity userEntity;
+    //private Integer user_id;
 
     /*
     @Builder

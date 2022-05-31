@@ -22,7 +22,7 @@ public interface PostsRepository extends JpaRepository<Posts, Integer> {
     Integer updateLikes(Integer id);
 
     @Modifying
-    @Query(value = "update posts p set p.bookmarkCnt = p.bookmarkCnt + 1 where p.id = :id",nativeQuery = true)
+    @Query(value = "update posts p set p.bookmark_cnt = p.bookmark_cnt + 1 where p.id = :id",nativeQuery = true)
     Integer updateBookmarkCnt(Integer id);
 /*
     @Modifying

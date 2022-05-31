@@ -3,6 +3,8 @@ package org.example.demo.web.dto.posts;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.example.demo.domain.comment.Comment;
 import org.example.demo.domain.posts.Posts;
 import org.example.demo.web.dto.comment.CommentResponseDto;
 
@@ -14,6 +16,7 @@ import java.util.stream.Collectors;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class PostsResponseDto {
     private Integer id;
     private String title;
@@ -25,10 +28,10 @@ public class PostsResponseDto {
     private String keyww;
     private String keywww;
     private Integer likes;
-    private Integer bookmarkCnt;
+    private Integer bookmark_cnt;
     private Integer report;
+    //private List<CommentResponseDto> comments;
     private List<CommentResponseDto> comments;
-
     public PostsResponseDto(Posts entity){
         this.id = entity.getId();
         this.title = entity.getTitle();
@@ -40,7 +43,7 @@ public class PostsResponseDto {
         this.keyww = entity.getKeyww();
         this.keywww = entity.getKeywww();
         this.likes = entity.getLikes();
-        this.bookmarkCnt = entity.getBookmarkCnt();
+        this.bookmark_cnt = entity.getBookmark_cnt();
         this.report = entity.getReport();
         this.comments = entity.getComments().stream().map(CommentResponseDto::new).collect(Collectors.toList());
     }

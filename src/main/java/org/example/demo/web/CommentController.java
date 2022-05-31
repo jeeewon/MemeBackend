@@ -29,9 +29,10 @@ public class CommentController {
     public ResponseEntity<?> addComment(@Valid @RequestBody CommentUploadDto commentUploadDto, BindingResult bindingResult, @AuthenticationPrincipal String email) {
         return new ResponseEntity<>(commentService.saveComment(commentUploadDto.getContent(), commentUploadDto.getPost_id(), commentUploadDto.set, HttpStatus.OK);
     }*/
-    @PostMapping("/posts/{id}/comment")
-    public Integer commentSave(@PathVariable Integer id, @AuthenticationPrincipal String email, @RequestBody CommentSaveDto saveDto) {
-        return commentService.commentSave(email,id,saveDto);
+    @PostMapping("/posts/{post_id}/comment")
+    //public Integer commentSave(@PathVariable Integer id, @AuthenticationPrincipal String email, @RequestBody CommentSaveDto saveDto) {
+    public Integer commentSave(@PathVariable Integer post_id, @AuthenticationPrincipal String email, @RequestBody CommentSaveDto saveDto) {
+        return commentService.commentSave(post_id,email,saveDto);
     }
 
     //@GetMapping("/posts/{id}/comment")

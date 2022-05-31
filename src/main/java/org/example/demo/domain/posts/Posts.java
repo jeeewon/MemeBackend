@@ -57,7 +57,7 @@ public class Posts extends BaseTimeEntity {
     private Integer likes;
 
     @Column(columnDefinition = "integer default 0")
-    private Integer bookmarkCnt;
+    private Integer bookmark_cnt;
 
     @Column()//columnDefinition = 0)
     private Integer report;
@@ -81,7 +81,7 @@ public class Posts extends BaseTimeEntity {
     public void updateLikes(Integer likes){
         this.likes = likes;
     }
-    public void updateBookmarkCnt(Integer bookmarkCnt){
-        this.bookmarkCnt=bookmarkCnt;
+    public void updateBookmarkCnt(Integer bookmark_cnt){
+        this.bookmark_cnt=bookmark_cnt;
     }
 }
