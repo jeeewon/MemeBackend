@@ -16,7 +16,7 @@ public interface PostsRepository extends JpaRepository<Posts, Integer> {
             "ORDER BY p.id DESC",nativeQuery = true)
     Page<Posts> findAllDesc(Pageable pageable);
     Page<Posts> findByTypeOrCategory(String type, String category,Pageable pageable);
-    Page<Posts> findBykeywContaining(String keyw,Pageable pageable);
+    Page<Posts> findBykeywAndType(String keyw,String type,Pageable pageable);
     Page<Posts> findAll(Pageable pageable);
 
     @Modifying
