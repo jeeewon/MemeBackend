@@ -1,6 +1,5 @@
 package org.example.demo.web.dto.member;
 
-import java.time.LocalDateTime;
 
 public class MyPageBookmarkDto {
     Integer file_id;

@@ -3,8 +3,6 @@ package org.example.demo.domain.posts;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.example.demo.domain.BaseTimeEntity;
-//import org.example.demo.domain.bookmark.Bookmark;
-//import org.example.demo.domain.comment.Comment;
 import org.example.demo.domain.bookmark.Bookmark;
 import org.example.demo.domain.comment.Comment;
 import org.example.demo.domain.member.UserEntity;
@@ -67,19 +65,13 @@ public class Posts extends BaseTimeEntity {
     @OneToMany(mappedBy = "posts", fetch=FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Comment> comments;
 
+    //@JsonIgnoreProperties({"posts"})
+    //@OneToMany(mappedBy = "posts",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    //private List<Bookmark> bookmark;
 
-
-    //게시글 수정 메소드
-    public void update(String title, String description){
-        this.title = title;
-        this.description = description;
-    }
-
-    //게시글 검색 메소드
     public void search(String keyw){
         this.keyw=keyw;
     }
-
     public void updateLikes(Integer likes){
         this.likes = likes;
     }

@@ -33,7 +33,6 @@ public class CommentService {
 
     @Transactional
     public void commentDelete(Integer id){
-
         commentRepository.deleteById(id);
     }
 }

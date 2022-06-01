@@ -3,6 +3,7 @@ package org.example.demo.web;
 import lombok.RequiredArgsConstructor;
 import org.example.demo.domain.member.UserRepository;
 import org.example.demo.services.member.MyPageService;
+import org.example.demo.web.dto.member.MyPageBookmarkDto;
 import org.example.demo.web.dto.member.MyPageCommentDto;
 import org.example.demo.web.dto.member.MyPagePostDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,28 +25,20 @@ public class MyPageController {
     UserRepository userRepository;
 
     @GetMapping("/mypage/posts")
-    public Page<MyPagePostDto> findPostByUser(@AuthenticationPrincipal String email, @RequestParam String type, @PageableDefault(size=5) Pageable pageable){
+    public Page<MyPagePostDto> findPostByUser(@AuthenticationPrincipal String email, @RequestParam String type, @PageableDefault(size=6) Pageable pageable){
         Integer id = userRepository.findByEmail(email).getId();
         return myPageService.findPostByUser(id,type,pageable);
     }
 
-    @GetMapping("/mypage/comments")
-    public Page<MyPageCommentDto> findCommentByUser(@AuthenticationPrincipal String email, @PageableDefault(size=5) Pageable pageable){
+    @GetMapping("/mypage/comment")
+    public Page<MyPageCommentDto> findCommentByUser(@AuthenticationPrincipal String email, @PageableDefault(size=6) Pageable pageable){
         Integer id = userRepository.findByEmail(email).getId();
         return myPageService.findCommentByUser(id,pageable);
     }
-/*
+
     @GetMapping("/mypage/bookmark")
-    public Page<MyPageBookmarkDto> findBookmarkByUser(@AuthenticationPrincipal String email,@RequestParam String type, @PageableDefault(size=5) Pageable pageable){
+    public Page<MyPageBookmarkDto> findBookmarkByUser(@AuthenticationPrincipal String email, @RequestParam String type, @PageableDefault(size=6) Pageable pageable){
         Integer id = userRepository.findByEmail(email).getId();
         return myPageService.findBookmarkByUser(id,pageable);
-    }*/
-    @GetMapping("/mypage/bookmark_test")
-    public Integer findBookmarkByUser(@AuthenticationPrincipal String email){
-        Integer id = userRepository.findByEmail(email).getId();
-        return myPageService.findBookmarkByUser(id);
     }
-
-
-
 }
