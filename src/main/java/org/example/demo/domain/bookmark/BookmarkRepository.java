@@ -1,9 +1,5 @@
 package org.example.demo.domain.bookmark;
 
-import org.example.demo.domain.posts.Posts;
-import org.example.demo.domain.member.User;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

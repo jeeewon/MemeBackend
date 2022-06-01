@@ -1,8 +1,8 @@
 package org.example.demo.web;
 
+import org.example.demo.domain.member.UserEntity;
 import org.example.demo.web.dto.member.UserDto;
 import lombok.extern.slf4j.Slf4j;
-import org.example.demo.domain.member.User;
 import org.example.demo.security.TokenProvider;
 import org.example.demo.services.member.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class UserController {
     public ResponseEntity<?> registerUser(@RequestBody UserDto userDTO) {
         try {
             // 리퀘스트를 이용해 저장할 유저 만들기
-            User user = User.builder()
+            UserEntity userEntity = UserEntity.builder()
                     .email(userDTO.getEmail())
                     .password(passwordEncoder.encode(userDTO.getPassword()))
                     .build();
@@ -39,10 +39,10 @@ public class UserController {
                 log.warn("password not equal");
                 throw new RuntimeException("비밀번호가 일치하지 않습니다");
             }*/
-            User registeredUser = userService.create(user);
+            UserEntity registeredUserEntity = userService.create(userEntity);
             UserDto responseUserDto = UserDto.builder()
-                    .email(registeredUser.getEmail())
-                    .id(registeredUser.getId())
+                    .email(registeredUserEntity.getEmail())
+                    .id(registeredUserEntity.getId())
                     .build();
             // 유저 정보는 항상 하나이므로 그냥 리스트로 만들어야하는 ResponseDTO를 사용하지 않고 그냥 UserDTO 리턴.
             return ResponseEntity.ok(responseUserDto);
@@ -54,24 +54,28 @@ public class UserController {
                     .body(responseDTO);
         }
     }
-    @GetMapping("/user-email/{email}/exist")
-    public ResponseEntity<Boolean> checkEmailDuplicate(@PathVariable String email){
+    /*@GetMapping("/user-email/exist")
+    public ResponseEntity<Boolean> checkEmailDuplicate(@RequestParam String email){
+        return ResponseEntity.ok(userService.checkEmailDuplicate(email));
+    }*/
+    @GetMapping("/user-email/exist")
+    public ResponseEntity<Boolean> checkEmailDuplicate(@RequestParam String email){
         return ResponseEntity.ok(userService.checkEmailDuplicate(email));
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticate(@RequestBody UserDto userDTO) {
-        User user = userService.getByCredentials(
+        UserEntity userEntity = userService.getByCredentials(
                 userDTO.getEmail(),
                 userDTO.getPassword(),
                 passwordEncoder);
 
-        if(user != null) {
+        if(userEntity != null) {
             // 토큰 생성
-            final String token = tokenProvider.create(user);
+            final String token = tokenProvider.create(userEntity);
             final UserDto responseUserDto = UserDto.builder()
-                    .email(user.getEmail())
-                    .id(user.getId())
+                    .email(userEntity.getEmail())
+                    .id(userEntity.getId())
                     .token(token)
                     .build();
             return ResponseEntity.ok().body(responseUserDto);

@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.demo.domain.BaseTimeEntity;
-import org.example.demo.domain.member.User;
+import org.example.demo.domain.member.UserEntity;
 import org.example.demo.domain.posts.Posts;
 
 import javax.persistence.*;
@@ -29,5 +29,5 @@ public class Comment extends BaseTimeEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserEntity userEntity;
 }

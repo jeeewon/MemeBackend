@@ -35,7 +35,6 @@ public class PostsResponseDto {
         this.id = entity.getId();
         this.title = entity.getTitle();
         this.file_id = entity.getFile_id();
-        //this.image = entity.getImage();
         this.description = entity.getDescription();
         this.example = entity.getExample();
         this.keyw = entity.getKeyw();

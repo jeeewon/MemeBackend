@@ -5,8 +5,9 @@ import lombok.*;
 import org.example.demo.domain.BaseTimeEntity;
 //import org.example.demo.domain.bookmark.Bookmark;
 //import org.example.demo.domain.comment.Comment;
+import org.example.demo.domain.bookmark.Bookmark;
 import org.example.demo.domain.comment.Comment;
-import org.example.demo.domain.member.User;
+import org.example.demo.domain.member.UserEntity;
 
 import javax.persistence.*;
 import java.util.List;
@@ -23,7 +24,7 @@ public class Posts extends BaseTimeEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
-    private User user;
+    private UserEntity userEntity;
 
     @Column(nullable = false)
     private String type;
@@ -65,6 +66,8 @@ public class Posts extends BaseTimeEntity {
     @JsonIgnoreProperties({"posts"})
     @OneToMany(mappedBy = "posts", fetch=FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Comment> comments;
+
+
 
     //게시글 수정 메소드
     public void update(String title, String description){
