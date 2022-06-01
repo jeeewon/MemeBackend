@@ -16,7 +16,7 @@ public class UserEntity {
     @Column(nullable = false)
     private String email;
     @Column(nullable = false)
-    private String password; // 패스워드. null이 가능한 이유는 oAuth로 페이스북이나 트위터같은 제3의 어플리케이션을 통해 로그인 할 수 있게 하기 위함이다.
+    private String password;
 
     public UserEntity(String email, String password) {
         this.email = email;

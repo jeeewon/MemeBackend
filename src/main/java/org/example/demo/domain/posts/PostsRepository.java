@@ -29,5 +29,6 @@ public interface PostsRepository extends JpaRepository<Posts, Integer> {
     @Query(value="select * from posts p where p.user_id = :id and p.type = :type",nativeQuery = true)
     Page<Posts> findByUserAndType(Integer id,String type,Pageable pageable);
 
-
+    @Query(value="select * from posts p where p.type=:type order by p.likes desc",nativeQuery = true)
+    Page<Posts> ranking(String type,Pageable pageable);
 }

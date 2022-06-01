@@ -59,7 +59,7 @@ public class Posts extends BaseTimeEntity {
     @Column(columnDefinition = "integer default 0")
     private Integer bookmark_cnt;
 
-    @Column()//columnDefinition = 0)
+    @Column(columnDefinition = "integer default 0")
     private Integer report;
 
     @OrderBy("id desc")

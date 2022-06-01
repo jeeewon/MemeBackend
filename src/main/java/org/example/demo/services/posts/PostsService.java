@@ -14,7 +14,6 @@ import org.example.demo.domain.posts.PostsRepository;
 import org.example.demo.web.dto.posts.PostsListResponseDto;
 import org.example.demo.web.dto.posts.PostsResponseDto;
 import org.example.demo.web.dto.posts.PostsSaveRequestDto;
-//import org.example.demo.web.dto.PostsUpdateRequestDto;
 import org.springframework.stereotype.Service;
 
 
@@ -38,7 +37,6 @@ public class PostsService {
                 .orElseThrow(()->new IllegalArgumentException("해당 게시글이 없습니다. id="+id));
         return new PostsResponseDto(entity);
     }
-
     @Transactional
     public void updateLikes(Integer id){
         postsRepository.updateLikes(id);

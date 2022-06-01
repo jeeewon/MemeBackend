@@ -29,13 +29,14 @@ public class UserController {
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody UserDto userDTO) {
         try {
-            // 리퀘스트를 이용해 저장할 유저 만들기
+
             UserEntity userEntity = UserEntity.builder()
                     .email(userDTO.getEmail())
                     .password(passwordEncoder.encode(userDTO.getPassword()))
                     .build();
-            // 서비스를 이용해 리파지토리에 유저 저장
-            /*if(!userDTO.getPasswordConfirm().equals(userDTO.getPassword())){
+            /*
+            비밀번호 확인
+            if(!userDTO.getPasswordConfirm().equals(userDTO.getPassword())){
                 log.warn("password not equal");
                 throw new RuntimeException("비밀번호가 일치하지 않습니다");
             }*/
@@ -44,20 +45,16 @@ public class UserController {
                     .email(registeredUserEntity.getEmail())
                     .id(registeredUserEntity.getId())
                     .build();
-            // 유저 정보는 항상 하나이므로 그냥 리스트로 만들어야하는 ResponseDTO를 사용하지 않고 그냥 UserDTO 리턴.
+
             return ResponseEntity.ok(responseUserDto);
         } catch (Exception e) {
-            // 예외가 나는 경우 bad 리스폰스 리턴.
             ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
             return ResponseEntity
                     .badRequest()
                     .body(responseDTO);
         }
     }
-    /*@GetMapping("/user-email/exist")
-    public ResponseEntity<Boolean> checkEmailDuplicate(@RequestParam String email){
-        return ResponseEntity.ok(userService.checkEmailDuplicate(email));
-    }*/
+
     @GetMapping("/user-email/exist")
     public ResponseEntity<Boolean> checkEmailDuplicate(@RequestParam String email){
         return ResponseEntity.ok(userService.checkEmailDuplicate(email));

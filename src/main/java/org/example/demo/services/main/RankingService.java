@@ -1,7 +1,6 @@
 package org.example.demo.services.main;
 
 import lombok.RequiredArgsConstructor;
-import org.example.demo.domain.posts.Posts;
 import org.example.demo.domain.posts.PostsRepository;
 import org.example.demo.web.dto.posts.PostsListResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;

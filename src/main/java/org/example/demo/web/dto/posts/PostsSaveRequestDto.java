@@ -1,7 +1,6 @@
 package org.example.demo.web.dto.posts;
 
 import lombok.*;
-//import org.example.demo.domain.member.UserEntity;
 import org.example.demo.domain.member.UserEntity;
 import org.example.demo.domain.posts.Posts;
 
@@ -22,8 +21,8 @@ public class PostsSaveRequestDto {
     private String keywww;
 
     private Integer likes;
-
     private Integer bookmark_cnt;
+    private Integer report;
 
     public Posts toEntity() {
         return Posts.builder()
@@ -39,6 +38,7 @@ public class PostsSaveRequestDto {
                 .keywww(this.keywww)
                 .likes(0)
                 .bookmark_cnt(0)
+                .report(0)
                 .build();
     }
 }
