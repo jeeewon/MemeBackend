@@ -19,9 +19,7 @@ public class BookmarkController {
     @PostMapping("/posts/{postId}/bookmark")
     public void bookmark(@PathVariable Integer postId, Authentication authentication){
         postsService.updateBookmarkCnt(postId);
-        //System.out.println(email);
         bookmarkService.bookmark(postId,authentication.getName());
-        //return postsService.findById(postId).getBookmark_cnt();
     }
 
     @DeleteMapping("/posts/{postId}/unBookmark")

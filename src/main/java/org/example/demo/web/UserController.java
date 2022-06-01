@@ -2,7 +2,7 @@ package org.example.demo.web;
 
 import org.example.demo.web.dto.member.UserDto;
 import lombok.extern.slf4j.Slf4j;
-import org.example.demo.domain.member.UserEntity;
+import org.example.demo.domain.member.User;
 import org.example.demo.security.TokenProvider;
 import org.example.demo.services.member.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class UserController {
     public ResponseEntity<?> registerUser(@RequestBody UserDto userDTO) {
         try {
             // 리퀘스트를 이용해 저장할 유저 만들기
-            UserEntity userEntity = UserEntity.builder()
+            User user = User.builder()
                     .email(userDTO.getEmail())
                     .password(passwordEncoder.encode(userDTO.getPassword()))
                     .build();
@@ -39,10 +39,10 @@ public class UserController {
                 log.warn("password not equal");
                 throw new RuntimeException("비밀번호가 일치하지 않습니다");
             }*/
-            UserEntity registeredUserEntity = userService.create(userEntity);
+            User registeredUser = userService.create(user);
             UserDto responseUserDto = UserDto.builder()
-                    .email(registeredUserEntity.getEmail())
-                    .id(registeredUserEntity.getId())
+                    .email(registeredUser.getEmail())
+                    .id(registeredUser.getId())
                     .build();
             // 유저 정보는 항상 하나이므로 그냥 리스트로 만들어야하는 ResponseDTO를 사용하지 않고 그냥 UserDTO 리턴.
             return ResponseEntity.ok(responseUserDto);
@@ -61,17 +61,17 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticate(@RequestBody UserDto userDTO) {
-        UserEntity userEntity = userService.getByCredentials(
+        User user = userService.getByCredentials(
                 userDTO.getEmail(),
                 userDTO.getPassword(),
                 passwordEncoder);
 
-        if(userEntity != null) {
+        if(user != null) {
             // 토큰 생성
-            final String token = tokenProvider.create(userEntity);
+            final String token = tokenProvider.create(user);
             final UserDto responseUserDto = UserDto.builder()
-                    .email(userEntity.getEmail())
-                    .id(userEntity.getId())
+                    .email(user.getEmail())
+                    .id(user.getId())
                     .token(token)
                     .build();
             return ResponseEntity.ok().body(responseUserDto);

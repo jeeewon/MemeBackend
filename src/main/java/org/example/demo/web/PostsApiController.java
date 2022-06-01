@@ -40,7 +40,7 @@ public class PostsApiController {
 
     //상세페이지
     @GetMapping("/posts/{id}")
-    public PostsResponseDto findById(@PathVariable Integer id,Authentication authentication,Model model){
+    public PostsResponseDto findById(@PathVariable Integer id,Model model){
         return postsService.findById(id);
     }
 

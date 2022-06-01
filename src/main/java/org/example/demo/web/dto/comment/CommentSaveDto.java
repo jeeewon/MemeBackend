@@ -1,13 +1,11 @@
 package org.example.demo.web.dto.comment;
 
 import lombok.Data;
-import org.apache.catalina.User;
 import org.example.demo.domain.comment.Comment;
-import org.example.demo.domain.member.UserEntity;
+import org.example.demo.domain.member.User;
 import org.example.demo.domain.posts.Posts;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @Data
 public class CommentSaveDto {
@@ -17,7 +15,7 @@ public class CommentSaveDto {
     //private UserEntity userEntity;
     //private Posts posts;
     private Posts posts;
-    private UserEntity userEntity;
+    private User user;
     public Comment toEntity() {
         Comment comments = Comment.builder()
                 .id(this.id)
@@ -25,7 +23,7 @@ public class CommentSaveDto {
                 //.userEntity(this.userEntity)
                 //.posts(this.posts)
                 .posts(this.posts)
-                .userEntity(this.userEntity)
+                .user(this.user)
                 .build();
         return comments;
     }

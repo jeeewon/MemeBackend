@@ -2,7 +2,7 @@ package org.example.demo.web.dto.posts;
 
 import lombok.*;
 //import org.example.demo.domain.member.UserEntity;
-import org.example.demo.domain.member.UserEntity;
+import org.example.demo.domain.member.User;
 import org.example.demo.domain.posts.Posts;
 
 @Data
@@ -10,12 +10,12 @@ import org.example.demo.domain.posts.Posts;
 @NoArgsConstructor
 @Builder
 public class PostsSaveRequestDto {
-    private UserEntity userEntity;
+    private User user;
     private String type;
     private String category;
     private String title;
     private String description;
-    private Integer fileId;
+    private Integer file_id;
     private String example;
     private String keyw;
     private String keyww;
@@ -27,10 +27,10 @@ public class PostsSaveRequestDto {
 
     public Posts toEntity() {
         return Posts.builder()
-                .userEntity(this.userEntity)
+                .user(this.user)
                 .type(this.type)
                 .category(this.category)
-                .fileId(this.fileId)
+                .file_id(this.file_id)
                 .title(this.title)
                 .description(this.description)
                 .example(this.example)

@@ -10,7 +10,6 @@ import java.util.List;
 
 @Repository
 public interface CommentRepository extends JpaRepository<Comment,Integer> {
-    @Query(value = "select content from comment c where c.post_id = :post_id",nativeQuery = true)
-    //Page<Comment> findByPostId(Integer postId, Pageable pageable);
-    List<Comment> findByPost(Integer post_id);
+    @Query(value = "select * from comment c where c.user_id = :id",nativeQuery = true)
+    Page<Comment> findByUser(Integer id, Pageable pageable);
 }

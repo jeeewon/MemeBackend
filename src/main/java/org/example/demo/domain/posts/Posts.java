@@ -5,9 +5,8 @@ import lombok.*;
 import org.example.demo.domain.BaseTimeEntity;
 //import org.example.demo.domain.bookmark.Bookmark;
 //import org.example.demo.domain.comment.Comment;
-import org.example.demo.domain.bookmark.Bookmark;
 import org.example.demo.domain.comment.Comment;
-import org.example.demo.domain.member.UserEntity;
+import org.example.demo.domain.member.User;
 
 import javax.persistence.*;
 import java.util.List;
@@ -24,7 +23,7 @@ public class Posts extends BaseTimeEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
-    private UserEntity userEntity;
+    private User user;
 
     @Column(nullable = false)
     private String type;
@@ -35,7 +34,7 @@ public class Posts extends BaseTimeEntity {
     @Column(length = 100, nullable = false)
     private String title;
 
-    private Integer fileId;
+    private Integer file_id;
     //private String image;
 
     @Column(columnDefinition = "TEXT", nullable = false)

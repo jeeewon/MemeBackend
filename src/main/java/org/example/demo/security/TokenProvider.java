@@ -3,7 +3,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
-import org.example.demo.domain.member.UserEntity;
+import org.example.demo.domain.member.User;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -15,7 +15,7 @@ import java.util.Date;
 public class TokenProvider {
     private static final String SECRET_KEY = "NMA8JPctFuna59f5";
 
-    public String create(UserEntity userEntity) {
+    public String create(User user) {
         // 기한 지금으로부터 1일로 설정
         Date expiryDate = Date.from(
                 Instant.now()
@@ -25,7 +25,7 @@ public class TokenProvider {
                 // header에 들어갈 내용 및 서명을 하기 위한 SECRET_KEY
                 .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
                 // payload에 들어갈 내용
-                .setSubject(userEntity.getEmail()) // sub
+                .setSubject(user.getEmail()) // sub
                 .setIssuer("demo app") // iss
                 .setIssuedAt(new Date()) // iat
                 .setExpiration(expiryDate) // exp

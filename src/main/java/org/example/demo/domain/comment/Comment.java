@@ -4,10 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.apache.catalina.User;
-import org.example.demo.domain.member.UserEntity;
+import org.example.demo.domain.BaseTimeEntity;
+import org.example.demo.domain.member.User;
 import org.example.demo.domain.posts.Posts;
-import org.example.demo.web.dto.comment.CommentResponseDto;
 
 import javax.persistence.*;
 
@@ -16,7 +15,7 @@ import javax.persistence.*;
 @Builder
 @Getter
 @Entity
-public class Comment {
+public class Comment extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -30,15 +29,5 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private UserEntity userEntity;
-    //private Integer user_id;
-
-    /*
-    @Builder
-    public Comment(String content, Posts posts, UserEntity userEntity){
-        this.content= content;
-        this.posts = posts;
-        this.userEntity = userEntity;
-    }*/
-
+    private User user;
 }

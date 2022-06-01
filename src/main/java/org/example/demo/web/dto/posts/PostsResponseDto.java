@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class PostsResponseDto {
     private Integer id;
     private String title;
-    private Integer fileId;
+    private Integer file_id;
     //private String image;
     private String description;
     private String example;
@@ -30,12 +30,11 @@ public class PostsResponseDto {
     private Integer likes;
     private Integer bookmark_cnt;
     private Integer report;
-    //private List<CommentResponseDto> comments;
     private List<CommentResponseDto> comments;
     public PostsResponseDto(Posts entity){
         this.id = entity.getId();
         this.title = entity.getTitle();
-        this.fileId = entity.getFileId();
+        this.file_id = entity.getFile_id();
         //this.image = entity.getImage();
         this.description = entity.getDescription();
         this.example = entity.getExample();

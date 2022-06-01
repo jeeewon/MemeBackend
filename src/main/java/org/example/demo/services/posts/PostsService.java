@@ -2,7 +2,7 @@ package org.example.demo.services.posts;
 
 //import org.example.demo.domain.member.UserEntity;
 //import org.example.demo.domain.member.UserRepository;
-import org.example.demo.domain.member.UserEntity;
+import org.example.demo.domain.member.User;
 import org.example.demo.domain.member.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,8 +27,8 @@ public class PostsService {
 
     @Transactional
     public Integer save(String email,PostsSaveRequestDto requestDto) {
-        UserEntity userEntity = userRepository.findByEmail(email);
-        requestDto.setUserEntity(userEntity);
+        User user = userRepository.findByEmail(email);
+        requestDto.setUser(user);
         return (postsRepository.save(requestDto.toEntity())).getId();
     }
 

@@ -2,7 +2,7 @@ package org.example.demo.domain.bookmark;
 
 import lombok.*;
 import org.example.demo.domain.posts.Posts;
-import org.example.demo.domain.member.UserEntity;
+import org.example.demo.domain.member.User;
 
 import javax.persistence.*;
 
@@ -21,12 +21,12 @@ public class Bookmark {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id")
-    private UserEntity userEntity;
+    private User user;
 
     @Builder
-    public Bookmark(Posts posts,UserEntity userEntity){
+    public Bookmark(Posts posts, User user){
         this.posts = posts;
-        this.userEntity = userEntity;
+        this.user = user;
     }
 }
 
