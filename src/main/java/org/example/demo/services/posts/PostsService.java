@@ -48,6 +48,10 @@ public class PostsService {
     public void updateBookmarkCnt(Integer id){
         postsRepository.updateBookmarkCnt(id);
     }
+    @Transactional
+    public void updateReport(Integer id){
+        postsRepository.updateReport(id);
+    }
 
     @Transactional(readOnly=true)
     public Page<PostsListResponseDto> findAllDesc(Pageable pagerequest) {

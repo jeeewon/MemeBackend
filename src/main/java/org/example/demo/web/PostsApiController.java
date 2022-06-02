@@ -63,5 +63,8 @@ public class PostsApiController {
         postsService.updateLikes(id);
     }
 
-
+    @PostMapping("/posts/{id}/report")
+    public void reportUpdate(@PathVariable Integer id){
+        postsService.updateReport(id);
+    }
 }

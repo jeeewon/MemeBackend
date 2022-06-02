@@ -29,6 +29,10 @@ public interface PostsRepository extends JpaRepository<Posts, Integer> {
     @Query(value = "update posts p set p.bookmark_cnt = p.bookmark_cnt + 1 where p.id = :id", nativeQuery = true)
     Integer updateBookmarkCnt(Integer id);
 
+    @Modifying
+    @Query(value = "update posts p set p.report = p.report + 1 where p.id = :id", nativeQuery = true)
+    Integer updateReport(Integer id);
+
     @Query(value="select * from posts p where p.activate='Y' and p.user_id = :id and p.type = :type",nativeQuery = true)
     Page<Posts> findByUserAndType(Integer id,String type,Pageable pageable);
 
