@@ -19,6 +19,7 @@ public class RankingService {
     public Page<PostsListResponseDto> ranking(String type, Pageable pagerequest) {
         return postsRepository.ranking(type, pagerequest).map(
                 posts -> new PostsListResponseDto(
+                        posts.getId(),
                         posts.getTitle()
                 ));
     }

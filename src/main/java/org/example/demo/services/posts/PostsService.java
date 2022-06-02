@@ -50,6 +50,7 @@ public class PostsService {
     public Page<PostsListResponseDto> findAllDesc(Pageable pagerequest) {
         return postsRepository.findAllDesc(pagerequest).map(
                 posts -> new PostsListResponseDto(
+                        posts.getId(),
                         posts.getTitle()
                 ));
     }
@@ -58,6 +59,7 @@ public class PostsService {
     public Page<PostsListResponseDto> categoryList(String type, String category,Pageable pagerequest) {
         return postsRepository.findByTypeOrCategory(type,category,pagerequest).map(
                 posts -> new PostsListResponseDto(
+                        posts.getId(),
                         posts.getTitle()
                 ));
     }
@@ -66,6 +68,7 @@ public class PostsService {
     public Page<PostsListResponseDto> search(String keyw,String type, Pageable pagerequest) {
         return postsRepository.findByKeywAndType(keyw,type,pagerequest).map(
                 posts -> new PostsListResponseDto(
+                        posts.getId(),
                         posts.getTitle()
                 ));
     }
