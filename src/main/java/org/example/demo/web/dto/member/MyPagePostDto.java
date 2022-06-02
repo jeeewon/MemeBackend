@@ -6,10 +6,11 @@ import lombok.ToString;
 @Getter
 @ToString
 public class MyPagePostDto {
+    Integer id;
     Integer file_id;
     String title;
     String description;
-    public MyPagePostDto(Integer file_id,String title,String description) {
+    public MyPagePostDto(Integer id, Integer file_id,String title,String description) {
         this.file_id = file_id;
         this.title = title;
         this.description = description;

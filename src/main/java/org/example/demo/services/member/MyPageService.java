@@ -28,6 +28,7 @@ public class MyPageService {
     public Page<MyPagePostDto> findPostByUser(Integer id,String type,Pageable pagerequest) {
         return postsRepository.findByUserAndType(id,type,pagerequest).map(
                 posts -> new MyPagePostDto(
+                        posts.getId(),
                         posts.getFile_id(),
                         posts.getTitle(),
                         posts.getDescription()
@@ -39,6 +40,7 @@ public class MyPageService {
     public Page<MyPageCommentDto> findCommentByUser(Integer id, Pageable pagerequest) {
         return commentRepository.findByUser(id,pagerequest).map(
                 comment -> new MyPageCommentDto(
+                        comment.getId(),
                         comment.getPosts().getTitle(),
                         comment.getContent(),
                         comment.getCreated_date()
@@ -49,6 +51,7 @@ public class MyPageService {
     public Page<MyPageBookmarkDto> findBookmarkByUser(Integer id,String type,Pageable pagerequest) {
         return bookmarkRepository.findByUserAndType(id,type,pagerequest).map(
                 bookmark -> new MyPageBookmarkDto(
+                        bookmark.getId(),
                         bookmark.getPosts().getFile_id(),
                         bookmark.getPosts().getTitle(),
                         bookmark.getPosts().getDescription()
