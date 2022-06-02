@@ -39,6 +39,6 @@ public class MyPageController {
     @GetMapping("/mypage/bookmark")
     public Page<MyPageBookmarkDto> findBookmarkByUser(@AuthenticationPrincipal String email, @RequestParam String type, @PageableDefault(size=6) Pageable pageable){
         Integer id = userRepository.findByEmail(email).getId();
-        return myPageService.findBookmarkByUser(id,pageable);
+        return myPageService.findBookmarkByUser(id,type,pageable);
     }
 }

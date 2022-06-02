@@ -46,11 +46,8 @@ public class MyPageService {
         );
     }
     @Transactional(readOnly=true)
-    public Page<MyPageBookmarkDto> findBookmarkByUser(Integer id,Pageable pagerequest) {
-        //System.out.println(bookmarkRepository.findByUser(id));
-        //Integer post_id = (bookmarkRepository.findByUser(id)).getPosts().getId();
-        //System.out.println(post_id);
-        return bookmarkRepository.findByUser(id,pagerequest).map(
+    public Page<MyPageBookmarkDto> findBookmarkByUser(Integer id,String type,Pageable pagerequest) {
+        return bookmarkRepository.findByUserAndType(id,type,pagerequest).map(
                 bookmark -> new MyPageBookmarkDto(
                         bookmark.getPosts().getFile_id(),
                         bookmark.getPosts().getTitle(),
