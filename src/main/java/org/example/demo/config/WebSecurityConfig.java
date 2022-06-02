@@ -9,7 +9,16 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.web.filter.CorsFilter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 @EnableWebSecurity(debug=true)
 @Slf4j
@@ -39,7 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests() // /와 /auth/** 경로는 인증 안해도 됨.
                 //.antMatchers("/auth/**").permitAll()
-                .antMatchers(HttpMethod.POST,"/auth/**","/posts","/posts/**/**").permitAll()
+                .antMatchers(HttpMethod.POST,"/auth/**","/posts/**/likes","/posts/**/report").permitAll()
                 .antMatchers(HttpMethod.GET,"/posts/**","/**").permitAll()
                 .anyRequest() // /와 /auth/**이외의 모든 경로는 인증 해야됨.
                 .authenticated();
