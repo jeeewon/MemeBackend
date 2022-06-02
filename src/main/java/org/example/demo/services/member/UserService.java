@@ -1,11 +1,17 @@
 package org.example.demo.services.member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.demo.domain.bookmark.BookmarkRepository;
+import org.example.demo.domain.comment.CommentRepository;
 import org.example.demo.domain.member.UserEntity;
 import org.example.demo.domain.member.UserRepository;
+import org.example.demo.domain.posts.Posts;
+import org.example.demo.domain.posts.PostsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 @RequiredArgsConstructor
 @Slf4j
 @Service
@@ -13,6 +19,9 @@ public class UserService {
 
     @Autowired
     private final UserRepository userRepository;
+    private final CommentRepository commentRepository;
+    private final BookmarkRepository bookmarkRepository;
+    private final PostsRepository postsRepository;
 
     public UserEntity create(final UserEntity userEntity) {
         if(userEntity == null || userEntity.getEmail() == null ) {
@@ -40,5 +49,21 @@ public class UserService {
             return originalUserEntity;
         }
         return null;
+    }
+    public Boolean checkExit(String email){
+        if(userRepository.alreadyExit(email) != null){
+            return true;
+        }
+        else return false;
+    }
+
+    @Transactional
+    public Integer delete(String email){
+        Integer id = userRepository.findByEmail(email).getId();
+        userRepository.ActivateNo(id);
+        postsRepository.deleteByUser(id);
+        commentRepository.deleteByUser(id);
+        bookmarkRepository.deleteByUser(id);
+        return id;
     }
 }

@@ -19,12 +19,6 @@ public class ForbiddenController {
         return forbiddenService.forbiddenSave(saveDto);
     }
 
-    @DeleteMapping("/forbidden/{id}")
-    public Integer delete(@PathVariable Integer id) {
-        postsService.delete(id);
-        return id;
-    }
-
     @GetMapping("/forbidden/exist")
     public ResponseEntity<Boolean> checkForbiddenWord(@RequestParam String word){
         return ResponseEntity.ok(forbiddenService.checkForbiddenWord(word));

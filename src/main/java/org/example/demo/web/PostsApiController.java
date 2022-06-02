@@ -35,10 +35,9 @@ public class PostsApiController {
     }
 
     //삭제
-    @DeleteMapping("/posts/{id}")
+    @PostMapping("/posts/delete/{id}")
     public Integer delete(@PathVariable Integer id) {
-        postsService.delete(id);
-        return id;
+        return postsService.delete(id);
     }
 
     //전체보기

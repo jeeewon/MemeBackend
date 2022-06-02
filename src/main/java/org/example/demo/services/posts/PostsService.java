@@ -2,6 +2,8 @@ package org.example.demo.services.posts;
 
 //import org.example.demo.domain.member.UserEntity;
 //import org.example.demo.domain.member.UserRepository;
+import org.example.demo.domain.bookmark.BookmarkRepository;
+import org.example.demo.domain.comment.CommentRepository;
 import org.example.demo.domain.member.UserEntity;
 import org.example.demo.domain.member.UserRepository;
 import org.springframework.data.domain.Page;
@@ -22,7 +24,8 @@ import org.springframework.stereotype.Service;
 public class PostsService {
     private final PostsRepository postsRepository;
     private final UserRepository userRepository;
-    //private final PostsCategoryRepository postsCategoryRepository;
+    private final CommentRepository commentRepository;
+    private final BookmarkRepository bookmarkRepository;
 
     @Transactional
     public Integer save(String email,PostsSaveRequestDto requestDto) {
@@ -57,7 +60,7 @@ public class PostsService {
 
     @Transactional(readOnly=true)
     public Page<PostsListResponseDto> categoryList(String type, String category,Pageable pagerequest) {
-        return postsRepository.findByTypeOrCategory(type,category,pagerequest).map(
+        return postsRepository.findByTypeAndCategory(type,category,pagerequest).map(
                 posts -> new PostsListResponseDto(
                         posts.getId(),
                         posts.getTitle()
@@ -66,19 +69,18 @@ public class PostsService {
 
     @Transactional(readOnly=true)
     public Page<PostsListResponseDto> search(String keyw,String type, Pageable pagerequest) {
-        return postsRepository.findByKeywAndType(keyw,type,pagerequest).map(
+        return postsRepository.findByKeywordAndType(keyw,type,pagerequest).map(
                 posts -> new PostsListResponseDto(
                         posts.getId(),
                         posts.getTitle()
                 ));
     }
 
-    //삭제
     @Transactional
-    public void delete(Integer id) {
-        Posts posts = postsRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. board_seq=" + id));
-
-        postsRepository.delete(posts);
+    public Integer delete(Integer id){
+        postsRepository.ActivateNo(id);
+        commentRepository.deleteByPost(id);
+        bookmarkRepository.deleteByPost(id);
+        return id;
     }
 }

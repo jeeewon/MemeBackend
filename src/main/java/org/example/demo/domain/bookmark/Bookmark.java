@@ -3,12 +3,14 @@ package org.example.demo.domain.bookmark;
 import lombok.*;
 import org.example.demo.domain.posts.Posts;
 import org.example.demo.domain.member.UserEntity;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Builder
 @Entity
 public class Bookmark {
     @Id
@@ -25,11 +27,7 @@ public class Bookmark {
     @JoinColumn(name="user_id")
     private UserEntity userEntity;
 
-    @Builder
-    public Bookmark(Posts posts, String type,UserEntity userEntity){
-        this.posts = posts;
-        this.type = type;
-        this.userEntity = userEntity;
-    }
+    @ColumnDefault("Y")
+    private String activate;
 }
 

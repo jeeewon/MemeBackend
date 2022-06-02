@@ -17,6 +17,15 @@ public interface BookmarkRepository extends JpaRepository<Bookmark,Integer> {
     @Query(value = "DELETE FROM bookmark WHERE post_id = :post_id AND user_id=:user_id",nativeQuery = true)
     void unBookmark(Integer post_id,Integer user_id);
 
-    @Query(value="select * from bookmark where user_id = :id and type=:type",nativeQuery = true)
+    @Query(value="select * from bookmark where user_id = :id and type=:type and activate='Y'",nativeQuery = true)
     Page<Bookmark> findByUserAndType(Integer id,String type,Pageable pageable);
+
+    @Modifying
+    @Query(value="UPDATE bookmark SET activate='N' where post_id=:post_id",nativeQuery = true)
+    void deleteByPost(Integer post_id);
+
+    @Modifying
+    @Query(value="UPDATE bookmark SET activate='N' where user_id=:user_id",nativeQuery = true)
+    void deleteByUser(Integer user_id);
+
 }

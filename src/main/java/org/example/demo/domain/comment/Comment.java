@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.example.demo.domain.BaseTimeEntity;
 import org.example.demo.domain.member.UserEntity;
 import org.example.demo.domain.posts.Posts;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -29,5 +30,8 @@ public class Comment extends BaseTimeEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private UserEntity userEntity;
+    private UserEntity user;
+
+    @ColumnDefault("Y")
+    private String activate;
 }

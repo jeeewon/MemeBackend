@@ -6,6 +6,7 @@ import org.example.demo.domain.BaseTimeEntity;
 import org.example.demo.domain.bookmark.Bookmark;
 import org.example.demo.domain.comment.Comment;
 import org.example.demo.domain.member.UserEntity;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.List;
@@ -59,6 +60,9 @@ public class Posts extends BaseTimeEntity {
 
     @Column(columnDefinition = "integer default 0")
     private Integer report;
+
+    @ColumnDefault("Y")
+    private String activate;
 
     @OrderBy("id desc")
     @JsonIgnoreProperties({"posts"})

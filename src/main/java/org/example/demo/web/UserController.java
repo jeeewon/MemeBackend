@@ -1,12 +1,14 @@
 package org.example.demo.web;
 
 import org.example.demo.domain.member.UserEntity;
+import org.example.demo.web.dto.member.ChangePwdDto;
 import org.example.demo.web.dto.member.UserDto;
 import lombok.extern.slf4j.Slf4j;
 import org.example.demo.security.TokenProvider;
 import org.example.demo.services.member.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +16,6 @@ import org.example.demo.web.dto.ResponseDTO;
 
 @Slf4j
 @RestController
-@RequestMapping("/auth")
 public class UserController {
 
     @Autowired
@@ -22,11 +23,10 @@ public class UserController {
     @Autowired
     private TokenProvider tokenProvider;
 
-    // Bean으로 작성해도 됨.
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 
-    @PostMapping("/signup")
+    @PostMapping("/auth/signup")
     public ResponseEntity<?> registerUser(@RequestBody UserDto userDTO) {
         try {
 
@@ -55,19 +55,19 @@ public class UserController {
         }
     }
 
-    @GetMapping("/user-email/exist")
+    @GetMapping("/auth/user-email/exist")
     public ResponseEntity<Boolean> checkEmailDuplicate(@RequestParam String email){
         return ResponseEntity.ok(userService.checkEmailDuplicate(email));
     }
 
-    @PostMapping("/login")
+    @PostMapping("/auth/login")
     public ResponseEntity<?> authenticate(@RequestBody UserDto userDTO) {
         UserEntity userEntity = userService.getByCredentials(
                 userDTO.getEmail(),
                 userDTO.getPassword(),
                 passwordEncoder);
 
-        if(userEntity != null) {
+        if(!userService.checkExit(userDTO.getEmail()) && userEntity != null) {
             // 토큰 생성
             final String token = tokenProvider.create(userEntity);
             final UserDto responseUserDto = UserDto.builder()
@@ -84,5 +84,9 @@ public class UserController {
                     .badRequest()
                     .body(responseDTO);
         }
+    }
+    @PostMapping("/exit")
+    public Integer deleteMember(Authentication authentication){
+        return userService.delete(authentication.getName());
     }
 }

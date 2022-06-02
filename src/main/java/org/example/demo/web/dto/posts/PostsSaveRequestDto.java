@@ -23,6 +23,7 @@ public class PostsSaveRequestDto {
     private Integer likes;
     private Integer bookmark_cnt;
     private Integer report;
+    private String activate;
 
     public Posts toEntity() {
         return Posts.builder()
@@ -39,6 +40,7 @@ public class PostsSaveRequestDto {
                 .likes(0)
                 .bookmark_cnt(0)
                 .report(0)
+                .activate("Y")
                 .build();
     }
 }
