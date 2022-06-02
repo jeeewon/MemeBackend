@@ -19,13 +19,16 @@ public class Bookmark {
     @JoinColumn(name="post_id")
     private Posts posts;
 
+    private String type;
+
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id")
     private UserEntity userEntity;
 
     @Builder
-    public Bookmark(Posts posts, UserEntity userEntity){
+    public Bookmark(Posts posts, String type,UserEntity userEntity){
         this.posts = posts;
+        this.type = type;
         this.userEntity = userEntity;
     }
 }
