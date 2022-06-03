@@ -85,6 +85,11 @@ public class UserController {
                     .body(responseDTO);
         }
     }
+
+    @PostMapping("/mypage/chage-pwd")
+    public Boolean changePassword(Authentication authentication,@RequestBody ChangePwdDto changePwdDto){
+        return userService.updatePwd(authentication.getName(),changePwdDto);
+    }
     @PostMapping("/exit")
     public Integer deleteMember(Authentication authentication){
         return userService.delete(authentication.getName());

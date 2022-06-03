@@ -7,7 +7,11 @@ import org.example.demo.domain.member.UserEntity;
 import org.example.demo.domain.member.UserRepository;
 import org.example.demo.domain.posts.Posts;
 import org.example.demo.domain.posts.PostsRepository;
+import org.example.demo.web.dto.member.ChangePwdDto;
+import org.example.demo.web.dto.member.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,6 +59,20 @@ public class UserService {
             return true;
         }
         else return false;
+    }
+
+    @Transactional
+    public Boolean updatePwd(String email,ChangePwdDto changePwdDto){
+        UserEntity userEntity  = userRepository.findByEmail(email);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        if(passwordEncoder.matches(changePwdDto.getOldPassword(), userEntity.getPassword())){
+            userRepository.updatePwd(email, passwordEncoder.encode(changePwdDto.getNewPassword()));
+            return true;
+
+        }
+        else {
+            throw new RuntimeException("Password is incorrect");
+        }
     }
 
     @Transactional
