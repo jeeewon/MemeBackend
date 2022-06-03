@@ -18,6 +18,9 @@ import org.example.demo.web.dto.posts.PostsResponseDto;
 import org.example.demo.web.dto.posts.PostsSaveRequestDto;
 import org.springframework.stereotype.Service;
 
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+
 
 @RequiredArgsConstructor
 @Service
@@ -35,10 +38,17 @@ public class PostsService {
     }
 
     @Transactional
-    public PostsResponseDto findById(Integer id){
-        Posts entity = postsRepository.findById(id)
-                .orElseThrow(()->new IllegalArgumentException("해당 게시글이 없습니다. id="+id));
-        return new PostsResponseDto(entity);
+    public PostsResponseDto findById(String email,Integer post_id){
+        Integer user_id = userRepository.findByEmail(email).getId();
+        Integer bookmark;
+        if(bookmarkRepository.findBookmarkByPostsAndUserEntity(post_id,user_id)!=0) bookmark=1;
+        else bookmark=0;
+        System.out.println("userid: "+user_id+"postid: "+post_id);
+        System.out.println("bookmarkYN:"+bookmarkRepository.findBookmarkByPostsAndUserEntity(post_id,user_id));
+        System.out.println("bookmark:"+bookmark);
+        Posts entity = postsRepository.findById(post_id)
+                .orElseThrow(()->new IllegalArgumentException("해당 게시글이 없습니다. id="+post_id));
+        return new PostsResponseDto(entity,bookmark);
     }
     @Transactional
     public void updateLikes(Integer id){

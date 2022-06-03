@@ -17,10 +17,12 @@ public class BookmarkService {
 
     @Transactional
     public void bookmark(Integer post_id,String email){
-        UserEntity userEntity = userRepository.findByEmail(email);
+        Integer user_id = userRepository.findByEmail(email).getId();
         String type = (postsRepository.findById(post_id)).get().getType();
-        System.out.println(type);
-        bookmarkRepository.bookmark(post_id,type,userEntity.getId());
+        if(bookmarkRepository.findBookmarkByPostsAndUserEntity(post_id,user_id)!=0){
+            bookmarkRepository.unBookmark(post_id,user_id);
+        }
+        else bookmarkRepository.bookmark(post_id,type,user_id);
     }
     @Transactional
     public void unBookmark(Integer post_id,String email){

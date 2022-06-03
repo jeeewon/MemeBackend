@@ -1,12 +1,10 @@
 package org.example.demo.web;
 
 import lombok.RequiredArgsConstructor;
-import org.example.demo.domain.posts.PostsRepository;
 import org.example.demo.services.posts.PostsService;
 import org.example.demo.web.dto.posts.PostsListResponseDto;
 import org.example.demo.web.dto.posts.PostsResponseDto;
 import org.example.demo.web.dto.posts.PostsSaveRequestDto;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -19,9 +17,6 @@ import org.springframework.web.bind.annotation.*;
 public class PostsApiController {
     private final PostsService postsService;
 
-    @Autowired
-    PostsRepository postsRepository;
-
     //등록하기
     @PostMapping("/posts")
     public Integer save(Authentication authentication,@RequestBody PostsSaveRequestDto requestDto) {
@@ -30,8 +25,8 @@ public class PostsApiController {
 
     //상세페이지
     @GetMapping("/posts/{id}")
-    public PostsResponseDto findById(@PathVariable Integer id){
-        return postsService.findById(id);
+    public PostsResponseDto findById(Authentication authentication,@PathVariable Integer id){
+        return postsService.findById(authentication.getName(),id);
     }
 
     //삭제

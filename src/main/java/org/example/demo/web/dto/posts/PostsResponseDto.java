@@ -28,10 +28,12 @@ public class PostsResponseDto {
     private String keyww;
     private String keywww;
     private Integer likes;
-    private Integer bookmark_cnt;
+
+    private Integer bookmark;
+    // private Integer bookmark_cnt;
     private Integer report;
     private List<CommentResponseDto> comments;
-    public PostsResponseDto(Posts entity){
+    public PostsResponseDto(Posts entity,Integer bookmark){
         this.id = entity.getId();
         this.title = entity.getTitle();
         this.file_id = entity.getFile_id();
@@ -41,7 +43,8 @@ public class PostsResponseDto {
         this.keyww = entity.getKeyww();
         this.keywww = entity.getKeywww();
         this.likes = entity.getLikes();
-        this.bookmark_cnt = entity.getBookmark_cnt();
+        this.bookmark = bookmark;
+        //this.bookmark_cnt = entity.getBookmark_cnt();
         this.report = entity.getReport();
         this.comments = entity.getComments().stream().map(CommentResponseDto::new).collect(Collectors.toList());
     }

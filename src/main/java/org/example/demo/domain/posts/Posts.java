@@ -56,9 +56,6 @@ public class Posts extends BaseTimeEntity {
     private Integer likes;
 
     @Column(columnDefinition = "integer default 0")
-    private Integer bookmark_cnt;
-
-    @Column(columnDefinition = "integer default 0")
     private Integer report;
 
     @ColumnDefault("Y")
@@ -68,6 +65,9 @@ public class Posts extends BaseTimeEntity {
     @JsonIgnoreProperties({"posts"})
     @OneToMany(mappedBy = "posts", fetch=FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Comment> comments;
+
+    @Column(columnDefinition = "integer default 0")
+    private Integer bookmark_cnt;
 
     //@JsonIgnoreProperties({"posts"})
     //@OneToMany(mappedBy = "posts",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
