@@ -51,7 +51,7 @@ public class MyPageService {
     public Page<MyPageBookmarkDto> findBookmarkByUser(Integer id,String type,Pageable pagerequest) {
         return bookmarkRepository.findByUserAndType(id,type,pagerequest).map(
                 bookmark -> new MyPageBookmarkDto(
-                        bookmark.getId(),
+                        bookmark.getPosts().getId(),
                         bookmark.getPosts().getFile_id(),
                         bookmark.getPosts().getTitle(),
                         bookmark.getPosts().getDescription()

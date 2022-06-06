@@ -4,13 +4,13 @@ import lombok.Getter;
 
 @Getter
 public class MyPageBookmarkDto {
-    Integer id;
+    Integer post_id;
     Integer file_id;
     String title;
     String description;
 
-    public MyPageBookmarkDto(Integer id,Integer file_id,String title,String description) {
-        this.id = id;
+    public MyPageBookmarkDto(Integer post_id,Integer file_id,String title,String description) {
+        this.post_id = post_id;
         this.file_id = file_id;
         this.title = title;
         this.description = description;
