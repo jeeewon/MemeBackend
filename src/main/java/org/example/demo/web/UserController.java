@@ -86,7 +86,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/mypage/chage-pwd")
+    @PostMapping("/mypage/change-pwd")
     public Boolean changePassword(Authentication authentication,@RequestBody ChangePwdDto changePwdDto){
         return userService.updatePwd(authentication.getName(),changePwdDto);
     }
