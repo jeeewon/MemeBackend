@@ -20,10 +20,4 @@ public class BookmarkController {
         postsService.updateBookmarkCnt(postId);
         bookmarkService.bookmark(postId,authentication.getName());
     }
-
-    @DeleteMapping("/posts/{postId}/unBookmark")
-    public void unBookmark(@PathVariable Integer postId,Authentication authentication){
-        postsService.updateBookmarkCnt(postId);
-        bookmarkService.unBookmark(postId,authentication.getName());
-    }
 }

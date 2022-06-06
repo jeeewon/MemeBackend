@@ -25,8 +25,8 @@ public class PostsApiController {
 
     //상세페이지
     @GetMapping("/posts/{id}")
-    public PostsResponseDto findById(Authentication authentication,@PathVariable Integer id){
-        return postsService.findById(authentication.getName(),id);
+    public PostsResponseDto findById(@PathVariable Integer id){
+        return postsService.findById(id);
     }
 
     //삭제
