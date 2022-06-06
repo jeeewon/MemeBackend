@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 public interface BookmarkRepository extends JpaRepository<Bookmark,Integer> {
-    @Query(value = "SELECT COUNT(id) FROM bookmark WHERE post_id=:post_id and user_id=:user_id",nativeQuery = true)
+    @Query(value = "SELECT COUNT(id) FROM bookmark WHERE post_id=:post_id and user_id=:user_id ORDER BY id DESC",nativeQuery = true)
     Long findBookmarkByPostsAndUserEntity(Integer post_id, Integer user_id);
 
     @Modifying
@@ -20,9 +20,9 @@ public interface BookmarkRepository extends JpaRepository<Bookmark,Integer> {
     @Query(value = "DELETE FROM bookmark WHERE post_id = :post_id AND user_id=:user_id",nativeQuery = true)
     void unBookmark(Integer post_id,Integer user_id);
 
-    @Query(value = "SELECT COUNT(id) from bookmark where post_id=:post_id and user_id =:user_id",nativeQuery = true)
+    @Query(value = "SELECT COUNT(id) FROM bookmark WHERE post_id=:post_id AND user_id =:user_id ORDER BY id DESC",nativeQuery = true)
     Long bookmarkYN(Integer post_id,Integer user_id);
-    @Query(value="select * from bookmark where user_id = :id and type=:type and activate='Y'",nativeQuery = true)
+    @Query(value="SELECT * FROM bookmark WHERE user_id = :id AND type=:type AND activate='Y' ORDER BY id DESC",nativeQuery = true)
     Page<Bookmark> findByUserAndType(Integer id,String type,Pageable pageable);
 
     @Modifying

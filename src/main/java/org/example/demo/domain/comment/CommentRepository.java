@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CommentRepository extends JpaRepository<Comment,Integer> {
-    @Query(value = "SELECT * FROM comment c WHERE c.user_id=:id AND c.activate='Y'",nativeQuery = true)
+    @Query(value = "SELECT * FROM comment c WHERE c.user_id=:id AND c.activate='Y' ORDER BY c.id DESC",nativeQuery = true)
     Page<Comment> findByUser(Integer id, Pageable pageable);
 
     @Modifying

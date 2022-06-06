@@ -19,6 +19,6 @@ public class MainController {
 
     @GetMapping("/ranking")
     public Page<PostsListResponseDto> findAllDesc(@PageableDefault(size=5) Pageable pageable){
-        return rankingService.ranking("단어",pageable);
+        return rankingService.ranking("word",pageable);
     }
 }

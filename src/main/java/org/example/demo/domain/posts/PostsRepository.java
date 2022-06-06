@@ -12,13 +12,13 @@ public interface PostsRepository extends JpaRepository<Posts, Integer> {
     @Query(value = "SELECT * FROM posts p WHERE activate = 'Y' ORDER BY p.id DESC", nativeQuery = true)
     Page<Posts> findAllDesc(Pageable pageable);
 
-    @Query(value = "SELECT * FROM posts WHERE activate ='Y' AND type=:type AND category= COALESCE(:category, category)",nativeQuery = true)
+    @Query(value = "SELECT * FROM posts WHERE activate ='Y' AND type=:type AND category= COALESCE(:category, category) ORDER BY id DESC",nativeQuery = true)
     Page<Posts> findByTypeAndCategory(String type, String category, Pageable pageable);
 
-    @Query(value = "SELECT * FROM posts WHERE activate ='Y' AND (keyw =:keyword OR keyww =:keyword OR keywww=:keyword) AND type=:type",nativeQuery = true)
+    @Query(value = "SELECT * FROM posts WHERE activate ='Y' AND (keyw =:keyword OR keyww =:keyword OR keywww=:keyword) AND type=:type ORDER BY id DESC",nativeQuery = true)
     Page<Posts> findByKeywordAndType(String keyword, String type, Pageable pageable);
 
-    @Query(value = "select * from posts where activate ='Y'",nativeQuery = true)
+    @Query(value = "select * from posts where activate ='Y' ORDER BY p.id DESC",nativeQuery = true)
     Page<Posts> findAll(Pageable pageable);
 
     @Modifying
@@ -33,7 +33,7 @@ public interface PostsRepository extends JpaRepository<Posts, Integer> {
     @Query(value = "update posts p set p.report = p.report + 1 where p.id = :id", nativeQuery = true)
     Integer updateReport(Integer id);
 
-    @Query(value="select * from posts p where p.activate='Y' and p.user_id = :id and p.type = :type",nativeQuery = true)
+    @Query(value="select * from posts p where p.activate='Y' and p.user_id = :id and p.type = :type ORDER BY p.id DESC",nativeQuery = true)
     Page<Posts> findByUserAndType(Integer id,String type,Pageable pageable);
 
     Page<Posts> findByIdAndType(Integer id,String type,Pageable pageable);
