@@ -33,6 +33,7 @@ public class UserController {
             UserEntity userEntity = UserEntity.builder()
                     .email(userDTO.getEmail())
                     .password(passwordEncoder.encode(userDTO.getPassword()))
+                    .activate(userDTO.getPassword())
                     .build();
             /*
             비밀번호 확인
@@ -44,6 +45,7 @@ public class UserController {
             UserDto responseUserDto = UserDto.builder()
                     .email(registeredUserEntity.getEmail())
                     .id(registeredUserEntity.getId())
+                    .activate("Y")
                     .build();
 
             return ResponseEntity.ok(responseUserDto);

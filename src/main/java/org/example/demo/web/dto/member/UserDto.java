@@ -23,4 +23,5 @@ public class UserDto {
     //@NotEmpty
     //private String passwordConfirm;
     private Integer id;
+    private String activate;
 }
