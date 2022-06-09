@@ -3,7 +3,7 @@ package org.example.demo.web;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 //import org.example.demo.domain.posts.ApiResponseMessage;
-import org.example.demo.services.S3Uploader;
+import org.example.demo.services.posts.S3Uploader;
 import org.example.demo.services.posts.PostsService;
 import org.example.demo.web.dto.posts.PostsListResponseDto;
 import org.example.demo.web.dto.posts.PostsResponseDto;
@@ -26,8 +26,9 @@ public class PostsApiController {
 
     //등록하기
     @PostMapping("/posts")
-    public Integer save(Authentication authentication,@RequestBody PostsSaveRequestDto requestDto) {
-        return postsService.save(authentication.getName(),requestDto);
+    public void save(Authentication authentication,@RequestPart PostsSaveRequestDto requestDto,@RequestPart MultipartFile multipartFile) throws IOException{
+        s3Uploader.upload(multipartFile,"static");
+        postsService.save(authentication.getName(),requestDto);
     }
 
     @PostMapping("/image")
