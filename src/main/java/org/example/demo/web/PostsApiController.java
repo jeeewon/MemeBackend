@@ -1,6 +1,9 @@
 package org.example.demo.web;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+//import org.example.demo.domain.posts.ApiResponseMessage;
+import org.example.demo.services.S3Uploader;
 import org.example.demo.services.posts.PostsService;
 import org.example.demo.web.dto.posts.PostsListResponseDto;
 import org.example.demo.web.dto.posts.PostsResponseDto;
@@ -10,17 +13,27 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 public class PostsApiController {
     private final PostsService postsService;
+    private final S3Uploader s3Uploader;
 
     //등록하기
     @PostMapping("/posts")
     public Integer save(Authentication authentication,@RequestBody PostsSaveRequestDto requestDto) {
         return postsService.save(authentication.getName(),requestDto);
+    }
+
+    @PostMapping("/image")
+    public String upload(@RequestParam("image") MultipartFile multipartFile) throws IOException {
+        String imgUrl = s3Uploader.upload(multipartFile, "static");
+        return imgUrl;
     }
 
     //상세페이지
