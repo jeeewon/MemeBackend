@@ -14,7 +14,8 @@ public class PostsSaveRequestDto {
     private String category;
     private String title;
     private String description;
-    private Integer file_id;
+    private String image;
+    // private Integer file_id;
     private String example;
     private String keyw;
     private String keyww;
@@ -30,7 +31,8 @@ public class PostsSaveRequestDto {
                 .userEntity(this.userEntity)
                 .type(this.type)
                 .category(this.category)
-                .file_id(this.file_id)
+                .image(this.image)
+                //.file_id(this.file_id)
                 .title(this.title)
                 .description(this.description)
                 .example(this.example)

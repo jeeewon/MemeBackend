@@ -34,8 +34,8 @@ public class Posts extends BaseTimeEntity {
     @Column(length = 100, nullable = false)
     private String title;
 
-    private Integer file_id;
-    //private String image;
+    //private Integer file_id;
+    private String image;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String description;

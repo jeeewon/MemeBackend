@@ -31,9 +31,10 @@ public class PostsService {
     private final BookmarkRepository bookmarkRepository;
 
     @Transactional
-    public Integer save(String email,PostsSaveRequestDto requestDto) {
+    public Integer save(String email,String imageUrl,PostsSaveRequestDto requestDto) {
         UserEntity userEntity = userRepository.findByEmail(email);
         requestDto.setUserEntity(userEntity);
+        requestDto.setImage(imageUrl);
         return (postsRepository.save(requestDto.toEntity())).getId();
     }
 

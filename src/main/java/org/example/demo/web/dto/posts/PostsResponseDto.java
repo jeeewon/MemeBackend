@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
 public class PostsResponseDto {
     private Integer id;
     private String title;
-    private Integer file_id;
-    //private String image;
+    //private Integer file_id;
+    private String image;
     private String description;
     private String example;
     private String keyw;
@@ -36,7 +36,8 @@ public class PostsResponseDto {
     public PostsResponseDto(Posts entity/*,Integer bookmark*/){
         this.id = entity.getId();
         this.title = entity.getTitle();
-        this.file_id = entity.getFile_id();
+        //this.file_id = entity.getFile_id();
+        this.image = entity.getImage();
         this.description = entity.getDescription();
         this.example = entity.getExample();
         this.keyw = entity.getKeyw();

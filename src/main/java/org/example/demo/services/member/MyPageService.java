@@ -29,7 +29,7 @@ public class MyPageService {
         return postsRepository.findByUserAndType(id,type,pagerequest).map(
                 posts -> new MyPagePostDto(
                         posts.getId(),
-                        posts.getFile_id(),
+                        posts.getImage(),
                         posts.getTitle(),
                         posts.getDescription()
                 )
@@ -52,7 +52,7 @@ public class MyPageService {
         return bookmarkRepository.findByUserAndType(id,type,pagerequest).map(
                 bookmark -> new MyPageBookmarkDto(
                         bookmark.getPosts().getId(),
-                        bookmark.getPosts().getFile_id(),
+                        bookmark.getPosts().getImage(),
                         bookmark.getPosts().getTitle(),
                         bookmark.getPosts().getDescription()
                 )

@@ -26,9 +26,9 @@ public class PostsApiController {
 
     //등록하기
     @PostMapping("/posts")
-    public void save(Authentication authentication,@RequestPart PostsSaveRequestDto requestDto,@RequestPart MultipartFile multipartFile) throws IOException{
-        s3Uploader.upload(multipartFile,"static");
-        postsService.save(authentication.getName(),requestDto);
+    public void save(Authentication authentication,@RequestPart(value = "requestDto") PostsSaveRequestDto requestDto,@RequestPart(value = "image") MultipartFile multipartFile) throws IOException{
+        String image = s3Uploader.upload(multipartFile,"static");
+        postsService.save(authentication.getName(),image,requestDto);
     }
 
     @PostMapping("/image")
