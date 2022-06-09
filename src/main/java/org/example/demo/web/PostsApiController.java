@@ -19,7 +19,7 @@ public class PostsApiController {
 
     //등록하기
     @PostMapping("/posts")
-    public Integer save(Authentication authentication,@RequestPart PostsSaveRequestDto requestDto) {
+    public Integer save(Authentication authentication,@RequestBody PostsSaveRequestDto requestDto) {
         return postsService.save(authentication.getName(),requestDto);
     }
 
