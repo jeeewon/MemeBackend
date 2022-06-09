@@ -48,7 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests() // /와 /auth/** 경로는 인증 안해도 됨.
                 //.antMatchers("/auth/**").permitAll()
-                .antMatchers(HttpMethod.POST,"/auth/**","/posts/**/likes","/posts/**/report").permitAll()
+                .antMatchers(HttpMethod.POST,"/auth/**","/posts/**/likes","/posts/**/report","/forbidden","/posts/delete/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/posts/**","/**").permitAll()
                 .anyRequest() // /와 /auth/**이외의 모든 경로는 인증 해야됨.
                 .authenticated();
