@@ -6,8 +6,10 @@ import lombok.Getter;
 public class PostsListResponseDto {
     private Integer id;
     private String title;
-    public PostsListResponseDto(Integer id,String title) {
+    private String image;
+    public PostsListResponseDto(Integer id,String title,String image) {
         this.id = id;
         this.title = title;
+        this.image = image;
     }
 }

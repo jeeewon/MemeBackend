@@ -73,7 +73,8 @@ public class PostsService {
         return postsRepository.findAllDesc(pagerequest).map(
                 posts -> new PostsListResponseDto(
                         posts.getId(),
-                        posts.getTitle()
+                        posts.getTitle(),
+                        posts.getImage()
                 ));
     }
 
@@ -82,7 +83,8 @@ public class PostsService {
         return postsRepository.findByTypeAndCategory(type,category,pagerequest).map(
                 posts -> new PostsListResponseDto(
                         posts.getId(),
-                        posts.getTitle()
+                        posts.getTitle(),
+                        posts.getImage()
                 ));
     }
 
@@ -91,7 +93,8 @@ public class PostsService {
         return postsRepository.findByKeywordAndType(keyw,type,pagerequest).map(
                 posts -> new PostsListResponseDto(
                         posts.getId(),
-                        posts.getTitle()
+                        posts.getTitle(),
+                        posts.getImage()
                 ));
     }
 

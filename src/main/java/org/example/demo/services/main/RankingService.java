@@ -20,7 +20,8 @@ public class RankingService {
         return postsRepository.ranking(type, pagerequest).map(
                 posts -> new PostsListResponseDto(
                         posts.getId(),
-                        posts.getTitle()
+                        posts.getTitle(),
+                        posts.getImage()
                 ));
     }
 }
