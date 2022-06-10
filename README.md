@@ -112,7 +112,7 @@ C:.
     │  │                      ├─forbidden : 금지단어 DTO
     │  │                      ├─member : 회원 DTO
     │  │                      └─posts : 게시글 DTO (request,response,list_response)
-    │  └─resources
+    │  └─resources : key
     └─test
         └─java
             └─org
