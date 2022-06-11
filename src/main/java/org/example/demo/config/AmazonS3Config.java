@@ -1,4 +1,4 @@
-package org.example.demo.config;
+/*package org.example.demo.config;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
@@ -32,3 +32,4 @@ public class AmazonS3Config {
                 .build();
     }
 }
+*/
