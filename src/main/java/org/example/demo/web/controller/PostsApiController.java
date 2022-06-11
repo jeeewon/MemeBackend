@@ -26,15 +26,13 @@ public class PostsApiController {
 
     //등록하기
     @PostMapping("/posts")
-    public void save(Authentication authentication,@RequestPart(value = "requestDto") PostsSaveRequestDto requestDto,@RequestPart(value = "image") MultipartFile multipartFile) throws IOException{
-        String image = s3Uploader.upload(multipartFile,"static");
-        postsService.save(authentication.getName(),image,requestDto);
+    public void save(Authentication authentication,@RequestBody PostsSaveRequestDto requestDto) throws IOException{
+        postsService.save(authentication.getName(),requestDto);
     }
-
     @PostMapping("/image")
-    public String upload(@RequestParam("image") MultipartFile multipartFile) throws IOException {
-        String imgUrl = s3Uploader.upload(multipartFile, "static");
-        return imgUrl;
+    public void saveImage(Authentication authentication,@RequestPart(value = "requestDto") PostsSaveRequestDto requestDto,@RequestPart(value = "image") MultipartFile multipartFile) throws IOException{
+        String image = s3Uploader.upload(multipartFile,"static");
+        postsService.saveImage(authentication.getName(),image,requestDto);
     }
 
     //상세페이지
