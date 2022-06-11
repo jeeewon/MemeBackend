@@ -26,23 +26,18 @@ dependencies {
     compileOnly('org.projectlombok:lombok')
     annotationProcessor('org.projectlombok:lombok')
     compile('org.springframework.boot:spring-boot-starter-web')
-    //compile('com.h2database:h2')
-    compile('org.springframework.boot:spring-boot-starter-data-jpa')
-
-    // 추가
-    compile('org.springframework.boot:spring-boot-starter-security')
-    //compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity5')
-    //compile('com.h2database:h2')
     testCompile('org.springframework.boot:spring-boot-starter-test')
+
+    //security & jwt
+    compile('org.springframework.boot:spring-boot-starter-security')
     testCompile("org.springframework.security:spring-security-test")
-    compile('org.springframework.boot:spring-boot-starter-jdbc')
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
-    //mysql
+
+    //mysql & jpa
+    compile('org.springframework.boot:spring-boot-starter-jdbc')
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     runtimeOnly 'mysql:mysql-connector-java'
+
     //s3
     implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
-//지우기
-    compile 'pl.allegro.tech.boot:handlebars-spring-boot-starter:0.3.2'
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 }
