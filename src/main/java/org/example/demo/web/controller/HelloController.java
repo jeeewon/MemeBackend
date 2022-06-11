@@ -1,4 +1,4 @@
-package org.example.demo.web;
+package org.example.demo.web.controller;
 
 import org.example.demo.web.dto.HelloResponseDto;
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package org.example.demo.web;
+package org.example.demo.web.controller;
 
 import org.example.demo.domain.member.UserEntity;
 import org.example.demo.web.dto.member.ChangePwdDto;

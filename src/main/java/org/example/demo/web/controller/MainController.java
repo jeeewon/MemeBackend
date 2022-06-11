@@ -1,4 +1,4 @@
-package org.example.demo.web;
+package org.example.demo.web.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.demo.domain.posts.Posts;
