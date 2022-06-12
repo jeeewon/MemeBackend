@@ -61,7 +61,7 @@ public class Posts extends BaseTimeEntity {
     @ColumnDefault("Y")
     private String activate;
 
-    @OrderBy("id desc")
+    //@OrderBy("id desc")
     @JsonIgnoreProperties({"posts"})
     @OneToMany(mappedBy = "posts", fetch=FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Comment> comments;
