@@ -2,7 +2,6 @@ package org.example.demo.web.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-//import org.example.demo.domain.posts.ApiResponseMessage;
 import org.example.demo.services.posts.S3Uploader;
 import org.example.demo.services.posts.PostsService;
 import org.example.demo.web.dto.posts.PostsListResponseDto;
@@ -26,7 +25,7 @@ public class PostsApiController {
 
     //등록하기
     @PostMapping("/posts")
-    public void save(Authentication authentication,@RequestBody PostsSaveRequestDto requestDto) {
+    public void save(Authentication authentication,@RequestBody PostsSaveRequestDto requestDto){
         postsService.save(authentication.getName(),requestDto);
     }
     @PostMapping("/image")
@@ -55,7 +54,7 @@ public class PostsApiController {
 
     //카테고리별 조회하기
     @GetMapping("/posts/list")
-    public Page<PostsListResponseDto> categoryList(@RequestParam String type,@RequestParam(value = "category" , required = false) String category,@PageableDefault(size=6) Pageable pageable){
+    public Page<PostsListResponseDto> categoryList(@RequestParam String type,@RequestParam String category,@PageableDefault(size=6) Pageable pageable){
         return postsService.categoryList(type,category,pageable);
     }
 
