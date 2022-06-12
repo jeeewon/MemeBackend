@@ -54,7 +54,7 @@ public class PostsApiController {
 
     //카테고리별 조회하기
     @GetMapping("/posts/list")
-    public Page<PostsListResponseDto> categoryList(@RequestParam String type,@RequestParam String category,@PageableDefault(size=6) Pageable pageable){
+    public Page<PostsListResponseDto> categoryList(@RequestParam String type,@RequestParam(value = "category" , required = false) String category,@PageableDefault(size=6) Pageable pageable){
         return postsService.categoryList(type,category,pageable);
     }
 
