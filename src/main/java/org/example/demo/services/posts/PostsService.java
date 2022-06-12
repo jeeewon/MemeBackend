@@ -86,7 +86,8 @@ public class PostsService {
 
     @Transactional(readOnly=true)
     public Page<PostsListResponseDto> categoryList(String type, String category,Pageable pagerequest) {
-        return postsRepository.findByTypeAndCategory(type,category,pagerequest).map(
+        System.out.print("category:"+category);
+        return postsRepository.findTypeAndCategory(type,category,pagerequest).map(
                 posts -> new PostsListResponseDto(
                         posts.getId(),
                         posts.getTitle(),

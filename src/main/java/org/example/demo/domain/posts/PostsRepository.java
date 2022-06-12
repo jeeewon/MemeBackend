@@ -12,8 +12,9 @@ public interface PostsRepository extends JpaRepository<Posts, Integer> {
     @Query(value = "SELECT * FROM posts p WHERE activate = 'Y' ORDER BY p.id DESC", nativeQuery = true)
     Page<Posts> findAllDesc(Pageable pageable);
 
-    @Query(value = "SELECT * FROM posts WHERE activate ='Y' AND type=:type AND category= COALESCE(:category, category) ORDER BY id DESC",nativeQuery = true)
-    Page<Posts> findByTypeAndCategory(String type, String category, Pageable pageable);
+    @Query(value = "SELECT * FROM posts WHERE activate ='Y' AND type=:type AND category= COALESCE(:category,category) ORDER BY id DESC",nativeQuery = true)
+    //@Query(value = "SELECT * FROM posts WHERE activate ='Y' AND type=:type AND (:category IS NULL OR category=:category) ORDER BY id DESC",nativeQuery = true)
+    Page<Posts> findTypeAndCategory(String type, String category, Pageable pageable);
 
     @Query(value = "SELECT * FROM posts WHERE activate ='Y' AND (keyw =:keyword OR keyww =:keyword OR keywww=:keyword) AND type=:type ORDER BY id DESC",nativeQuery = true)
     Page<Posts> findByKeywordAndType(String keyword, String type, Pageable pageable);
