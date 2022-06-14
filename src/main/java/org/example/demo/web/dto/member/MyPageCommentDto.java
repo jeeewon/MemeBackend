@@ -19,10 +19,4 @@ public class MyPageCommentDto {
         this.content = content;
         this.created_date = created_date;
     }
-     /*
-    public MyPageCommentDto(Comment comment){
-        this.title = comment.getPosts().getTitle();
-        this.content = comment.getContent();
-        this.created_date = comment.getCreated_date();
-    }*/
 }
