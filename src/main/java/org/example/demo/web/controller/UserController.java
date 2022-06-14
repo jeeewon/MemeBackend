@@ -35,12 +35,7 @@ public class UserController {
                     .password(passwordEncoder.encode(userDTO.getPassword()))
                     .activate("Y")
                     .build();
-            /*
-            비밀번호 확인
-            if(!userDTO.getPasswordConfirm().equals(userDTO.getPassword())){
-                log.warn("password not equal");
-                throw new RuntimeException("비밀번호가 일치하지 않습니다");
-            }*/
+          
             UserEntity registeredUserEntity = userService.create(userEntity);
             UserDto responseUserDto = UserDto.builder()
                     .email(registeredUserEntity.getEmail())
