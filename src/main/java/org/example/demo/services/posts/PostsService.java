@@ -1,7 +1,5 @@
 package org.example.demo.services.posts;
 
-//import org.example.demo.domain.member.UserEntity;
-//import org.example.demo.domain.member.UserRepository;
 import org.example.demo.domain.bookmark.BookmarkRepository;
 import org.example.demo.domain.comment.CommentRepository;
 import org.example.demo.domain.member.UserEntity;
@@ -44,17 +42,6 @@ public class PostsService {
         return (postsRepository.save(requestDto.toEntity())).getId();
     }
 
-    /* 유저별 북마크 다르게 상세페이지 출력
-    @Transactional
-    public PostsResponseDto findById(String email,Integer post_id){
-        Integer user_id = userRepository.findByEmail(email).getId();
-        Integer bookmark;
-        if(bookmarkRepository.findBookmarkByPostsAndUserEntity(post_id,user_id)!=0) bookmark=1;
-        else bookmark=0;
-        Posts entity = postsRepository.findById(post_id)
-                .orElseThrow(()->new IllegalArgumentException("해당 게시글이 없습니다. id="+post_id));
-        return new PostsResponseDto(entity,bookmark);
-    }*/
     @Transactional
     public PostsResponseDto findById(Integer post_id){
         Posts entity = postsRepository.findById(post_id)
