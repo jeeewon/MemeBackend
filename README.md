@@ -1,54 +1,75 @@
-# MemeBackend
-|팀원|역할|
-|--------|--------------------|
-|공동|더미데이터(밈) 수집, 회의록 작성, 화면설계(피그마), 최종 보고서 작성|
-|윤혜진|제안서 작성,시연영상 시나리오 작성 및 영상 제작|
-|이민재|노션 관리,제안서 ppt 제작,최종 ppt 제작|
-|이서영|제안서 작성,최종 제출물(영상,PPT,발표대본) 검수,포스터 제작|
-|이지원|제안서 ppt 제작,제안서 발표,최종 발표|
+# 밈과사전 (MemeBackend)
 
+인터넷 밈을 등록·검색할 수 있는 사전형 아카이빙 서비스의 백엔드 레포지토리
 
-|팀원|역할|
-|--------|-------------------|
-|이민재|DB설계,API설게,더미데이터 생성,</br>전반적인 환경설정 및 배포(AWS RDS-MYSQL연동,테이블 생성,이미지처리,AWS S3-EC2연동,배포 스크립트 작성,AWS EC2배포),</br>서버 프로그래밍|
-|이지원|DB설계,API설계,더미데이터 생성,</br>전반적인 서버 프로그래밍(회원가입,로그인,게시글 등록,조회,좋아요,북마크,신고,댓글,마이페이지,비밀번호수정,회원탈퇴),</br>환경설정 및 배포|
-````bash
+## 소개
+
+- 빠른 유행 주기로 밈 문화를 따라가기 어려운 사람들을 위한 사전형 밈 아카이빙 서비스
+- 세대 간 밈 정보 격차 해소 목적
+- 혐오 표현이 담긴 밈의 무분별한 확산 방지 (신고 기능)
+
+## 주요 기능
+
+- 회원가입 / 로그인 (JWT 인증)
+- 밈 등록, 검색, 타입(단어/짤)·카테고리(TV/영화/커뮤니티/기타)별 조회
+- 좋아요 기반 밈 랭킹
+- 북마크
+- 댓글
+- 신고 (누적 3회 이상 시 자동 삭제)
+- 마이페이지 (본인 활동 확인, 비밀번호 수정, 회원 탈퇴)
+
+## 서비스 화면
+
+**메인 (밈 검색 / 랭킹)**
+
+![메인 화면](docs/images/home.png)
+
+**밈 상세**
+
+![밈 상세 화면](docs/images/meme-detail.png)
+
+**타입/카테고리별 밈 목록**
+
+![밈 목록 화면](docs/images/meme-list.png)
+
+## 기술 스택
+
+- Spring Boot 2.1.9, Java 8
+- Spring Security, JWT (jjwt)
+- Spring Data JPA, MySQL
+- AWS RDS, AWS S3 (Spring Cloud AWS)
+- Git, Figma
+
+## 폴더 구조
+
+```
 └─src
-    ├─main
-    │  ├─generated
-    │  ├─java
-    │  │  └─org
-    │  │      └─example
-    │  │          └─demo
-    │  │              ├─config
-    │  │              ├─domain
-    │  │              │  ├─bookmark : 북마크 entity
-    │  │              │  ├─comment : 댓글 entity
-    │  │              │  ├─forbidden : 금지단어 entity
-    │  │              │  ├─user : 회원 entity
-    │  │              │  └─posts : 게시글 entity
-    │  │              ├─security
-    │  │              ├─services
-    │  │              │  ├─bookmark : 북마크 service (북마크 추가,삭제,중복방지처리)
-    │  │              │  ├─comment : 댓글 service (댓글 작성)
-    │  │              │  ├─forbidden : 금지단어 service (금지단어 추가,금지단어 필터링,금지단어 게시글 삭제)
-    │  │              │  ├─main : 메인페이지 service (랭킹)
-    │  │              │  ├─user : 회원 service (회원가입,로그인,로그아웃,회원탈퇴,마이페이지)
-    │  │              │  └─posts : 게시글 service (게시글 작성,타입/카테고리별 조회,키워드 검색,상세 페이지)
-    │  │              └─web
-    │  │                  └─controller : API  
-    │  │                  └─dto
-    │  │                      ├─bookmark : 북마크 DTO
-    │  │                      ├─comment : 댓글 DTO
-    │  │                      ├─forbidden : 금지단어 DTO
-    │  │                      ├─member : 회원 DTO
-    │  │                      └─posts : 게시글 DTO (request,response,list_response)
-    │  └─resources : key
-    └─test
-        └─java
-            └─org
-                └─example
-                    └─demo
-                        └─web
-                            └─dto
-````
+    └─main
+        └─java/org/example/demo
+            ├─config
+            ├─domain
+            │  ├─bookmark   : 북마크 entity
+            │  ├─comment    : 댓글 entity
+            │  ├─forbidden  : 금지단어 entity
+            │  ├─user       : 회원 entity
+            │  └─posts      : 게시글 entity
+            ├─security
+            ├─services
+            │  ├─bookmark   : 북마크 추가/삭제, 중복 방지
+            │  ├─comment    : 댓글 작성
+            │  ├─forbidden  : 금지단어 필터링, 신고 게시글 삭제
+            │  ├─main       : 랭킹
+            │  ├─user       : 회원가입/로그인/로그아웃/탈퇴/마이페이지
+            │  └─posts      : 게시글 작성, 타입/카테고리별 조회, 키워드 검색, 상세 조회
+            └─web
+                ├─controller : API
+                └─dto
+```
+
+## 진행 기간
+
+2022.03 ~ 2022.06 (서비스 기획부터 배포까지)
+
+## 팀 구성
+
+프론트엔드 2인, 백엔드 2인으로 구성된 4인 팀 프로젝트입니다.
